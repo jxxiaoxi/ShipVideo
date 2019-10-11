@@ -12,7 +12,7 @@
  * the License.
  */
 
-package com.anding.shipvideo;
+package com.anding.shipvideo.fragment;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,6 +22,9 @@ import androidx.leanback.app.VideoSupportFragmentGlueHost;
 import androidx.leanback.media.MediaPlayerAdapter;
 import androidx.leanback.media.PlaybackTransportControlGlue;
 import androidx.leanback.widget.PlaybackControlsRow;
+
+import com.anding.shipvideo.Movie;
+import com.anding.shipvideo.activity.DetailsActivity;
 
 /**
  * Handles video playback with media controls.

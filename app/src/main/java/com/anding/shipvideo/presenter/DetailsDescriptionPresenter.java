@@ -12,9 +12,11 @@
  * the License.
  */
 
-package com.anding.shipvideo;
+package com.anding.shipvideo.presenter;
 
 import androidx.leanback.widget.AbstractDetailsDescriptionPresenter;
+
+import com.anding.shipvideo.Movie;
 
 public class DetailsDescriptionPresenter extends AbstractDetailsDescriptionPresenter {
 

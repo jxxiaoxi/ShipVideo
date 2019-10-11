@@ -12,10 +12,12 @@
  * the License.
  */
 
-package com.anding.shipvideo;
+package com.anding.shipvideo.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+
+import com.anding.shipvideo.R;
 
 /*
  * Main Activity class that loads {@link MainFragment}.

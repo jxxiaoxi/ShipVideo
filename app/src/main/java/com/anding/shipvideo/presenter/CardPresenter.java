@@ -12,7 +12,7 @@
  * the License.
  */
 
-package com.anding.shipvideo;
+package com.anding.shipvideo.presenter;
 
 import android.graphics.drawable.Drawable;
 
@@ -23,6 +23,8 @@ import androidx.core.content.ContextCompat;
 import android.util.Log;
 import android.view.ViewGroup;
 
+import com.anding.shipvideo.Category;
+import com.anding.shipvideo.R;
 import com.bumptech.glide.Glide;
 
 /*

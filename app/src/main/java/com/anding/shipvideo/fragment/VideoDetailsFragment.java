@@ -12,7 +12,7 @@
  * the License.
  */
 
-package com.anding.shipvideo;
+package com.anding.shipvideo.fragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -42,6 +42,14 @@ import androidx.core.content.ContextCompat;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.anding.shipvideo.presenter.CardPresenter;
+import com.anding.shipvideo.presenter.DetailsDescriptionPresenter;
+import com.anding.shipvideo.Movie;
+import com.anding.shipvideo.MovieList;
+import com.anding.shipvideo.R;
+import com.anding.shipvideo.activity.DetailsActivity;
+import com.anding.shipvideo.activity.MainActivity;
+import com.anding.shipvideo.activity.PlaybackActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;

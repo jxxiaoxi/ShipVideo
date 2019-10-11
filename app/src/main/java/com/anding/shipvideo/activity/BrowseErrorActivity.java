@@ -11,7 +11,7 @@
  * or implied. See the License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.anding.shipvideo;
+package com.anding.shipvideo.activity;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -23,6 +23,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+
+import com.anding.shipvideo.fragment.ErrorFragment;
+import com.anding.shipvideo.R;
 
 /*
  * BrowseErrorActivity shows how to use ErrorFragment
