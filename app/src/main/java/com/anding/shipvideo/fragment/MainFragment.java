@@ -44,7 +44,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anding.shipvideo.presenter.CardPresenter;
-import com.anding.shipvideo.Category;
+import com.anding.shipvideo.been.Category;
 import com.anding.shipvideo.CategoryList;
 import com.anding.shipvideo.R;
 import com.anding.shipvideo.activity.BrowseErrorActivity;

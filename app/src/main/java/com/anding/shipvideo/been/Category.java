@@ -12,7 +12,7 @@
  * the License.
  */
 
-package com.anding.shipvideo;
+package com.anding.shipvideo.been;
 
 import java.io.Serializable;
 

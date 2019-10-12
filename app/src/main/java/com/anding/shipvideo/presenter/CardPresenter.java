@@ -23,7 +23,7 @@ import androidx.core.content.ContextCompat;
 import android.util.Log;
 import android.view.ViewGroup;
 
-import com.anding.shipvideo.Category;
+import com.anding.shipvideo.been.Category;
 import com.anding.shipvideo.R;
 import com.bumptech.glide.Glide;
 

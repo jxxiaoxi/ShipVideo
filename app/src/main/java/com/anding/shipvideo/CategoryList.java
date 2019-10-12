@@ -14,6 +14,8 @@
 
 package com.anding.shipvideo;
 
+import com.anding.shipvideo.been.Category;
+
 import java.util.ArrayList;
 import java.util.List;
 
