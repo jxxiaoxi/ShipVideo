@@ -49,6 +49,7 @@ import com.anding.shipvideo.CategoryList;
 import com.anding.shipvideo.R;
 import com.anding.shipvideo.activity.BrowseErrorActivity;
 import com.anding.shipvideo.activity.DetailsActivity;
+import com.anding.shipvideo.utils.Constants;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
@@ -60,13 +61,13 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainFragment extends BrowseFragment {
-    private static final String TAG = "liuwei";
+    private static final String TAG = "MainFragment";
 
     private static final int BACKGROUND_UPDATE_DELAY = 300;
     private static final int GRID_ITEM_WIDTH = 200;
     private static final int GRID_ITEM_HEIGHT = 200;
     private static final int NUM_ROWS = 4;
-    private static final int NUM_COLS = 15;
+    private static final int NUM_COLS = 4;
 
     private final Handler mHandler = new Handler();
     private Drawable mDefaultBackground;
@@ -86,7 +87,7 @@ public class MainFragment extends BrowseFragment {
 
         loadRows();
 
-       setupEventListeners();
+        setupEventListeners();
     }
 
     @Override
@@ -99,33 +100,70 @@ public class MainFragment extends BrowseFragment {
     }
 
     private void loadRows() {
-        List<Category> list = CategoryList.setupCategorys();
+        //加载行业分类
+        initTradeCategoryRows();
+        //加载安全类别分类
+        initTimeCategoryRows();
+        //加载工种分类
+        initRegionCategoryRows();
+        //加载综合分类
+        initColligateCategoryRows();
 
+    }
+
+    private void initTradeCategoryRows() {
+        List<Category> tradeList = CategoryList.setupTradeCategorys();
         ArrayObjectAdapter rowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());
         CardPresenter cardPresenter = new CardPresenter();
 
-        int i;
-        for (i = 0; i < NUM_ROWS; i++) {
-            if (i != 0) {
-                Collections.shuffle(list);
-            }
-            ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(cardPresenter);
-            for (int j = 0; j < NUM_COLS; j++) {
-                listRowAdapter.add(list.get(j % 5));
-            }
-            HeaderItem header = new HeaderItem(i, CategoryList.HEADER_CATEGORYS[i]);
-            rowsAdapter.add(new ListRow(header, listRowAdapter));
+        ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(cardPresenter);
+        for (int j = 0; j < NUM_COLS; j++) {
+            listRowAdapter.add(tradeList.get(j));
         }
+        HeaderItem header = new HeaderItem(Constants.CATEGORY_TRADE, CategoryList.HEADER_CATEGORYS[Constants.CATEGORY_TRADE]);
+        rowsAdapter.add(new ListRow(header, listRowAdapter));
+        setAdapter(rowsAdapter);
+    }
 
-//        HeaderItem gridHeader = new HeaderItem(i, "PREFERENCES");
-//
-//        GridItemPresenter mGridPresenter = new GridItemPresenter();
-//        ArrayObjectAdapter gridRowAdapter = new ArrayObjectAdapter(mGridPresenter);
-//        gridRowAdapter.add(getResources().getString(R.string.grid_view));
-//        gridRowAdapter.add(getString(R.string.error_fragment));
-//        gridRowAdapter.add(getResources().getString(R.string.personal_settings));
-//        rowsAdapter.add(new ListRow(gridHeader, gridRowAdapter));
+    private void initTimeCategoryRows() {
+        List<Category> tradeList = CategoryList.setupTradeCategorys();
+        ArrayObjectAdapter rowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());
+        CardPresenter cardPresenter = new CardPresenter();
 
+        ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(cardPresenter);
+        for (int j = 0; j < NUM_COLS; j++) {
+            listRowAdapter.add(tradeList.get(j));
+        }
+        HeaderItem header = new HeaderItem(Constants.CATEGORY_TIME, CategoryList.HEADER_CATEGORYS[Constants.CATEGORY_TIME]);
+        rowsAdapter.add(new ListRow(header, listRowAdapter));
+        setAdapter(rowsAdapter);
+    }
+
+    private void initRegionCategoryRows() {
+        List<Category> tradeList = CategoryList.setupTradeCategorys();
+        ArrayObjectAdapter rowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());
+        CardPresenter cardPresenter = new CardPresenter();
+
+        ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(cardPresenter);
+        for (int j = 0; j < NUM_COLS; j++) {
+            listRowAdapter.add(tradeList.get(j));
+        }
+        HeaderItem header = new HeaderItem(Constants.CATEGORY_REGION, CategoryList.HEADER_CATEGORYS[Constants.CATEGORY_REGION]);
+        rowsAdapter.add(new ListRow(header, listRowAdapter));
+        setAdapter(rowsAdapter);
+    }
+
+    private void initColligateCategoryRows() {
+        List<Category> tradeList = CategoryList.setupTradeCategorys();
+        ArrayObjectAdapter rowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());
+        CardPresenter cardPresenter = new CardPresenter();
+
+        ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(cardPresenter);
+        for (int j = 0; j < NUM_COLS; j++) {
+            listRowAdapter.add(tradeList.get(j));
+        }
+        HeaderItem header = new HeaderItem(Constants.CATEGORY_COLLIGATE, CategoryList.HEADER_CATEGORYS[Constants.CATEGORY_COLLIGATE]);
+        rowsAdapter.add(new ListRow(header, listRowAdapter));
         setAdapter(rowsAdapter);
     }
 
@@ -168,7 +206,7 @@ public class MainFragment extends BrowseFragment {
     }
 
     private void updateBackground(String uri) {
-        Log.d(TAG,"updateBackground : "+uri);
+        Log.d(TAG, "updateBackground : " + uri);
         int width = mMetrics.widthPixels;
         int height = mMetrics.heightPixels;
         Glide.with(getActivity())
@@ -198,12 +236,12 @@ public class MainFragment extends BrowseFragment {
         @Override
         public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item,
                                   RowPresenter.ViewHolder rowViewHolder, Row row) {
-            Log.d(TAG,"onItemClicked ==> "+row.getId() + " -->"+row.getHeaderItem().getId()+" ---> "+row.getHeaderItem().getName());
+            Log.d(TAG, "onItemClicked ==> " + row.getId() + " -->" + row.getHeaderItem().getId() + " ---> " + row.getHeaderItem().getName());
             if (item instanceof Category) {
                 Category Category = (Category) item;
-                Log.d(TAG, "Item: " + item.toString() +Category.getId() );
+                Log.d(TAG, "Item: " + item.toString() + Category.getId());
                 Intent intent = new Intent(getActivity(), DetailsActivity.class);
-               // intent.putExtra(DetailsActivity.Category, Category);
+                // intent.putExtra(DetailsActivity.Category, Category);
 
                 Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(
                         getActivity(),
@@ -229,9 +267,9 @@ public class MainFragment extends BrowseFragment {
                 Object item,
                 RowPresenter.ViewHolder rowViewHolder,
                 Row row) {
-            Log.d(TAG,"ItemViewSelectedListener"+row.getId()+"-->"+row.getHeaderItem().getName()+ "  "+ row.getHeaderItem().getId());
+            Log.d(TAG, "ItemViewSelectedListener" + row.getId() + "-->" + row.getHeaderItem().getName() + "  " + row.getHeaderItem().getId());
             if (item instanceof Category) {
-               // mBackgroundUri = ((Category) item).getBackgroundImageUrl();
+                // mBackgroundUri = ((Category) item).getBackgroundImageUrl();
                 startBackgroundTimer();
             }
         }

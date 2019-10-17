@@ -14,6 +14,7 @@
 
 package com.anding.shipvideo.presenter;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 
 import androidx.leanback.widget.ImageCardView;
@@ -21,7 +22,9 @@ import androidx.leanback.widget.Presenter;
 import androidx.core.content.ContextCompat;
 
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.anding.shipvideo.been.Category;
 import com.anding.shipvideo.R;
@@ -32,7 +35,7 @@ import com.bumptech.glide.Glide;
  * It contains an Image CardView
  */
 public class CardPresenter extends Presenter {
-    private static final String TAG = "liuwei";
+    private static final String TAG = "CardPresenter";
 
     private static final int CARD_WIDTH = 313;
     private static final int CARD_HEIGHT = 176;
@@ -50,6 +53,7 @@ public class CardPresenter extends Presenter {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent) {
+        final Context context = parent.getContext();
         sDefaultBackgroundColor =
                 ContextCompat.getColor(parent.getContext(), R.color.default_background);
         sSelectedBackgroundColor =
@@ -82,7 +86,7 @@ public class CardPresenter extends Presenter {
         ImageCardView cardView = (ImageCardView) viewHolder.view;
         if (Category.getCardImageUrl() != null) {
             cardView.setTitleText(Category.getTitle());
-          //  cardView.setContentText(Category.getStudio());
+            //  cardView.setContentText(Category.getStudio());
             cardView.setMainImageDimensions(CARD_WIDTH, CARD_HEIGHT);
             Glide.with(viewHolder.view.getContext())
                     .load(Category.getCardImageUrl())

@@ -1,6 +1,6 @@
 package com.anding.shipvideo.activity;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.TextUtils;
@@ -9,8 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.alibaba.fastjson.JSON;
 import com.anding.shipvideo.R;
+import com.anding.shipvideo.base.BaseActivity;
 import com.anding.shipvideo.been.Splash;
 import com.anding.shipvideo.been.Video;
 import com.anding.shipvideo.utils.Constants;
@@ -19,15 +19,19 @@ import com.anding.shipvideo.utils.HttpUtils;
 import com.anding.shipvideo.utils.LogUtils;
 import com.anding.shipvideo.utils.SerializableUtils;
 import com.bumptech.glide.Glide;
+import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.interfaces.OnCancelListener;
+import com.lxj.xpopup.interfaces.OnConfirmListener;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Response;
 
-public class SplashActivity extends Activity {
+public class SplashActivity extends BaseActivity {
     public static final String TAG = "SplashActivity";
 
     private Splash mSplash;
@@ -59,9 +63,15 @@ public class SplashActivity extends Activity {
                 onViewClicked(v);
             }
         });
-        showAndDownSplash();
+
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initVideosFromRemote();
+        showAndDownSplash();
+    }
 
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -95,7 +105,7 @@ public class SplashActivity extends Activity {
     private void showSplash() {
         mSplash = getLocalSplash();
         if (mSplash != null && !TextUtils.isEmpty(mSplash.savePath)) {
-            Log.d("SplashDemo", "SplashActivity 获取本地序列化成功" + mSplash);
+           LogUtils.d(TAG, "SplashActivity 获取本地序列化成功" + mSplash);
             Glide.with(this).load(mSplash.savePath).dontAnimate().into(mSpBgImage);
             startClock();
         } else {
@@ -105,7 +115,7 @@ public class SplashActivity extends Activity {
                 public void run() {
                     gotoMainActivity();
                 }
-            }, 1000);
+            }, 3000);
         }
     }
 
@@ -135,10 +145,9 @@ public class SplashActivity extends Activity {
 
 
     private void gotoMainActivity() {
-        initVideosFromRemote();
-//        Intent intent = new Intent(this, MainActivity.class);
-//        startActivity(intent);
-//        finish();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override
@@ -158,6 +167,11 @@ public class SplashActivity extends Activity {
      * 从服务器拉取所有的视频资源
      * */
     private void initVideosFromRemote() {
+        //判断网络是否可用
+//        if (!HttpUtils.isNetworkAvailable(this)) {
+//            showNeedNetWorkDialog();
+//            return;
+//        }
         HttpUtils.getInstance().getDataAsyn(Constants.SERVER_URL, new HttpUtils.NetWorkCallBack() {
             @Override
             public void success(Call call, Response response) throws IOException {
@@ -168,9 +182,13 @@ public class SplashActivity extends Activity {
                 // 2 解析JSON数据
                 String videosStr = response.body().string();
                 LogUtils.d(TAG, "initVideosFromRemote success==> " + videosStr);
-                List<Video> videos = JSON.parseArray(videosStr, Video.class);
-                for(int i =0;i<videos.size();i++){
-                    LogUtils.d(TAG,"name ==> "+videos.get(i).getVname());
+                // List<Video> videos = JSON.parseArray(videosStr, Video.class);
+                List<Video> videos = new ArrayList<>();
+                for (int j = 0; j < 30; j++) {
+                    videos.add(new Video("http://1257476497.vod2.myqcloud.com/d11999f6vodcq1257476497/f8a941f95285890794792703672/wbbPyeKk43UA.mp4", "视频" + j, "http://132.232.111.161/storage/video/0.jpg", "0"));
+                }
+                for (int i = 0; i < videos.size(); i++) {
+                    LogUtils.d(TAG, "name ==> " + videos.get(i).getVname());
                     DatabaseUtils.getInstance().insertVideo(videos.get(i));
                 }
             }
@@ -181,5 +199,22 @@ public class SplashActivity extends Activity {
             }
         });
 
+    }
+
+    private void showNeedNetWorkDialog() {
+        new XPopup.Builder(this).asConfirm(getString(R.string.no_network_title),
+                getString(R.string.no_network_content), getString(R.string.cancal), getString(R.string.confirm),
+                new OnConfirmListener() {
+                    @Override
+                    public void onConfirm() {
+                        showToast("确定");
+                    }
+                }, new OnCancelListener() {
+                    @Override
+                    public void onCancel() {
+                        showToast("取消");
+                    }
+                }, false)
+                .show();
     }
 }

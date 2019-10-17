@@ -24,4 +24,9 @@ public class Constants {
     public static final String SPLASH_PATH = ShipvideoApplication.getContext().getFilesDir().getAbsolutePath() + "/alpha/splash";
 
     public static final String SPLASH_FILE_NAME = "splash.srr";
+    public static final int CATEGORY_TRADE = 0;
+    public static final int CATEGORY_TIME = 1;
+    public static final int CATEGORY_REGION = 2;
+    public static final int CATEGORY_COLLIGATE = 3;
+
 }

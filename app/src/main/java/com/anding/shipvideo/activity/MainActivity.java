@@ -14,15 +14,15 @@
 
 package com.anding.shipvideo.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import com.anding.shipvideo.R;
+import com.anding.shipvideo.base.BaseActivity;
 
 /*
  * Main Activity class that loads {@link MainFragment}.
  */
-public class MainActivity extends Activity {
+public class MainActivity extends BaseActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
