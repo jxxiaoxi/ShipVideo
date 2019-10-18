@@ -8,7 +8,7 @@ import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.identityscope.IdentityScopeType;
 import org.greenrobot.greendao.internal.DaoConfig;
 
-import com.anding.shipvideo.been.Video;
+import com.anding.shipvideo.data.Video;
 
 import com.anding.shipvideo.database.VideoDao;
 

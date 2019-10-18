@@ -16,9 +16,8 @@
     <!-- Error messages -->
     <string name="error_fragment_message">An error occurred</string>
     <string name="dismiss_error">Dismiss</string>
-    <string name="no_network_title">温馨提示</string>
-    <string name="no_network_content">网络不可用，请先开启网络后，再使用</string>
-    <string name="cancal">取消</string>
-    <string name="confirm">确定</string>
-
+    <string name="no_network_title">��ܰ��ʾ</string>
+    <string name="no_network_content">���粻���ã����ȿ����������ʹ��</string>
+    <string name="cancal">ȡ��</string>
+    <string name="confirm">ȷ��</string>
 </resources>

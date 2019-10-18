@@ -1,4 +1,4 @@
-package com.anding.shipvideo.been;
+package com.anding.shipvideo.data;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;

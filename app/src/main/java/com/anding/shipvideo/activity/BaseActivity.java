@@ -1,4 +1,4 @@
-package com.anding.shipvideo.base;
+package com.anding.shipvideo.activity;
 
 import android.app.Activity;
 import android.widget.Toast;

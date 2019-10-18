@@ -14,7 +14,7 @@
 
 package com.anding.shipvideo.presenter;
 
-import androidx.leanback.widget.AbstractDetailsDescriptionPresenter;
+import android.support.v17.leanback.widget.AbstractDetailsDescriptionPresenter;
 
 import com.anding.shipvideo.Movie;
 

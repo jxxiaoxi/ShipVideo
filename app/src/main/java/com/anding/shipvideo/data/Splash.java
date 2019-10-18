@@ -1,4 +1,4 @@
-package com.anding.shipvideo.been;
+package com.anding.shipvideo.data;
 
 import java.io.Serializable;
 

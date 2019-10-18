@@ -15,8 +15,9 @@
 package com.anding.shipvideo.activity;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
-import androidx.fragment.app.FragmentActivity;
+//import androidx.fragment.app.FragmentActivity;
 
 import com.anding.shipvideo.fragment.PlaybackVideoFragment;
 

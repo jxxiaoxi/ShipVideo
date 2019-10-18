@@ -20,21 +20,18 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 
-import androidx.leanback.app.BackgroundManager;
-import androidx.leanback.app.BrowseFragment;
-import androidx.leanback.widget.ArrayObjectAdapter;
-import androidx.leanback.widget.HeaderItem;
-import androidx.leanback.widget.ImageCardView;
-import androidx.leanback.widget.ListRow;
-import androidx.leanback.widget.ListRowPresenter;
-import androidx.leanback.widget.OnItemViewClickedListener;
-import androidx.leanback.widget.OnItemViewSelectedListener;
-import androidx.leanback.widget.Presenter;
-import androidx.leanback.widget.Row;
-import androidx.leanback.widget.RowPresenter;
-import androidx.core.app.ActivityOptionsCompat;
-import androidx.core.content.ContextCompat;
-
+import android.support.v17.leanback.app.BackgroundManager;
+import android.support.v17.leanback.app.BrowseFragment;
+import android.support.v17.leanback.widget.ArrayObjectAdapter;
+import android.support.v17.leanback.widget.HeaderItem;
+import android.support.v17.leanback.widget.ListRow;
+import android.support.v17.leanback.widget.ListRowPresenter;
+import android.support.v17.leanback.widget.OnItemViewClickedListener;
+import android.support.v17.leanback.widget.OnItemViewSelectedListener;
+import android.support.v17.leanback.widget.Presenter;
+import android.support.v17.leanback.widget.Row;
+import android.support.v17.leanback.widget.RowPresenter;
+import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -43,19 +40,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anding.shipvideo.activity.VideosActivity;
+import com.anding.shipvideo.data.Category;
 import com.anding.shipvideo.presenter.CardPresenter;
-import com.anding.shipvideo.been.Category;
 import com.anding.shipvideo.CategoryList;
 import com.anding.shipvideo.R;
-import com.anding.shipvideo.activity.BrowseErrorActivity;
-import com.anding.shipvideo.activity.DetailsActivity;
 import com.anding.shipvideo.utils.Constants;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -100,21 +95,22 @@ public class MainFragment extends BrowseFragment {
     }
 
     private void loadRows() {
+        ArrayObjectAdapter rowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());
+        CardPresenter cardPresenter = new CardPresenter();
         //加载行业分类
-        initTradeCategoryRows();
+        initTradeCategoryRows(rowsAdapter,cardPresenter);
         //加载安全类别分类
-        initTimeCategoryRows();
+        initTimeCategoryRows(rowsAdapter,cardPresenter);
         //加载工种分类
-        initRegionCategoryRows();
+        initRegionCategoryRows(rowsAdapter,cardPresenter);
         //加载综合分类
-        initColligateCategoryRows();
+        initColligateCategoryRows(rowsAdapter,cardPresenter);
 
     }
 
-    private void initTradeCategoryRows() {
+    private void initTradeCategoryRows(ArrayObjectAdapter rowsAdapter,CardPresenter cardPresenter) {
         List<Category> tradeList = CategoryList.setupTradeCategorys();
-        ArrayObjectAdapter rowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());
-        CardPresenter cardPresenter = new CardPresenter();
+
 
         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(cardPresenter);
         for (int j = 0; j < NUM_COLS; j++) {
@@ -125,10 +121,8 @@ public class MainFragment extends BrowseFragment {
         setAdapter(rowsAdapter);
     }
 
-    private void initTimeCategoryRows() {
+    private void initTimeCategoryRows(ArrayObjectAdapter rowsAdapter,CardPresenter cardPresenter) {
         List<Category> tradeList = CategoryList.setupTradeCategorys();
-        ArrayObjectAdapter rowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());
-        CardPresenter cardPresenter = new CardPresenter();
 
         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(cardPresenter);
         for (int j = 0; j < NUM_COLS; j++) {
@@ -139,10 +133,8 @@ public class MainFragment extends BrowseFragment {
         setAdapter(rowsAdapter);
     }
 
-    private void initRegionCategoryRows() {
+    private void initRegionCategoryRows(ArrayObjectAdapter rowsAdapter,CardPresenter cardPresenter) {
         List<Category> tradeList = CategoryList.setupTradeCategorys();
-        ArrayObjectAdapter rowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());
-        CardPresenter cardPresenter = new CardPresenter();
 
         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(cardPresenter);
         for (int j = 0; j < NUM_COLS; j++) {
@@ -153,11 +145,8 @@ public class MainFragment extends BrowseFragment {
         setAdapter(rowsAdapter);
     }
 
-    private void initColligateCategoryRows() {
+    private void initColligateCategoryRows(ArrayObjectAdapter rowsAdapter,CardPresenter cardPresenter) {
         List<Category> tradeList = CategoryList.setupTradeCategorys();
-        ArrayObjectAdapter rowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());
-        CardPresenter cardPresenter = new CardPresenter();
-
         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(cardPresenter);
         for (int j = 0; j < NUM_COLS; j++) {
             listRowAdapter.add(tradeList.get(j));
@@ -240,19 +229,14 @@ public class MainFragment extends BrowseFragment {
             if (item instanceof Category) {
                 Category Category = (Category) item;
                 Log.d(TAG, "Item: " + item.toString() + Category.getId());
-                Intent intent = new Intent(getActivity(), DetailsActivity.class);
+                Intent intent = new Intent(getActivity(), VideosActivity.class);
                 // intent.putExtra(DetailsActivity.Category, Category);
 
-                Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                        getActivity(),
-                        ((ImageCardView) itemViewHolder.view).getMainImageView(),
-                        DetailsActivity.SHARED_ELEMENT_NAME)
-                        .toBundle();
-                getActivity().startActivity(intent, bundle);
+                getActivity().startActivity(intent);
             } else if (item instanceof String) {
                 if (((String) item).contains(getString(R.string.error_fragment))) {
-                    Intent intent = new Intent(getActivity(), BrowseErrorActivity.class);
-                    startActivity(intent);
+                    //Intent intent = new Intent(getActivity(), BrowseErrorActivity.class);
+                   // startActivity(intent);
                 } else {
                     Toast.makeText(getActivity(), ((String) item), Toast.LENGTH_SHORT).show();
                 }

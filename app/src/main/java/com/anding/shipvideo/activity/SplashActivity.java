@@ -10,18 +10,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.anding.shipvideo.R;
-import com.anding.shipvideo.base.BaseActivity;
-import com.anding.shipvideo.been.Splash;
-import com.anding.shipvideo.been.Video;
+import com.anding.shipvideo.data.Splash;
+import com.anding.shipvideo.data.Video;
 import com.anding.shipvideo.utils.Constants;
 import com.anding.shipvideo.utils.DatabaseUtils;
 import com.anding.shipvideo.utils.HttpUtils;
 import com.anding.shipvideo.utils.LogUtils;
 import com.anding.shipvideo.utils.SerializableUtils;
 import com.bumptech.glide.Glide;
-import com.lxj.xpopup.XPopup;
-import com.lxj.xpopup.interfaces.OnCancelListener;
-import com.lxj.xpopup.interfaces.OnConfirmListener;
 
 import java.io.File;
 import java.io.IOException;
@@ -202,19 +198,19 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void showNeedNetWorkDialog() {
-        new XPopup.Builder(this).asConfirm(getString(R.string.no_network_title),
-                getString(R.string.no_network_content), getString(R.string.cancal), getString(R.string.confirm),
-                new OnConfirmListener() {
-                    @Override
-                    public void onConfirm() {
-                        showToast("确定");
-                    }
-                }, new OnCancelListener() {
-                    @Override
-                    public void onCancel() {
-                        showToast("取消");
-                    }
-                }, false)
-                .show();
+//        new XPopup.Builder(this).asConfirm(getString(R.string.no_network_title),
+//                getString(R.string.no_network_content), getString(R.string.cancal), getString(R.string.confirm),
+//                new OnConfirmListener() {
+//                    @Override
+//                    public void onConfirm() {
+//                        showToast("确定");
+//                    }
+//                }, new OnCancelListener() {
+//                    @Override
+//                    public void onCancel() {
+//                        showToast("取消");
+//                    }
+//                }, false)
+//                .show();
     }
 }

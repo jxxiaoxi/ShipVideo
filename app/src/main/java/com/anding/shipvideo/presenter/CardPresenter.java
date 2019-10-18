@@ -17,17 +17,16 @@ package com.anding.shipvideo.presenter;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
-import androidx.leanback.widget.ImageCardView;
-import androidx.leanback.widget.Presenter;
-import androidx.core.content.ContextCompat;
-
+import android.support.v17.leanback.widget.ImageCardView;
+import android.support.v17.leanback.widget.Presenter;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.anding.shipvideo.been.Category;
 import com.anding.shipvideo.R;
+import com.anding.shipvideo.data.Category;
 import com.bumptech.glide.Glide;
 
 /*

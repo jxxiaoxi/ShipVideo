@@ -1,7 +1,7 @@
 package com.anding.shipvideo.utils;
 
 import com.anding.shipvideo.ShipvideoApplication;
-import com.anding.shipvideo.been.Video;
+import com.anding.shipvideo.data.Video;
 
 import java.util.List;
 
