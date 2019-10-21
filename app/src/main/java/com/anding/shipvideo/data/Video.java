@@ -8,51 +8,63 @@ import java.io.Serializable;
 @Entity
 public class Video implements Serializable {
     static final long serialVersionUID = 727566175075960653L;
-    String vid;
-    String vname;
-    String vpic;
-    String vcategory;
-    @Generated(hash = 2134316902)
-    public Video(String vid, String vname, String vpic, String vcategory) {
-        this.vid = vid;
-        this.vname = vname;
-        this.vpic = vpic;
-        this.vcategory = vcategory;
+    String uri;//视频播放地址
+    String name;//视频名称
+    String description;//视频描述
+    String pic;//视频简图
+    String category;//视频所属类别
+
+    @Generated(hash = 1856908545)
+    public Video(String uri, String name, String description, String pic,
+            String category) {
+        this.uri = uri;
+        this.name = name;
+        this.description = description;
+        this.pic = pic;
+        this.category = category;
     }
 
     @Generated(hash = 237528154)
     public Video() {
     }
 
-    public String getVid() {
-        return this.vid;
+    public String getUri() {
+        return uri;
     }
 
-    public void setVid(String vid) {
-        this.vid = vid;
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 
-    public String getVname() {
-        return this.vname;
+    public String getName() {
+        return name;
     }
 
-    public void setVname(String vname) {
-        this.vname = vname;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getVpic() {
-        return this.vpic;
+    public String getDescription() {
+        return description;
     }
 
-    public void setVpic(String vpic) {
-        this.vpic = vpic;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getVcategory() {
-        return this.vcategory;
+    public String getPic() {
+        return pic;
     }
 
-    public void setVcategory(String vcategory) {
-        this.vcategory = vcategory;
+    public void setPic(String pic) {
+        this.pic = pic;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

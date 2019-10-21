@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.anding.shipvideo.R;
-import com.anding.shipvideo.adapter.GridAdapter;
+import com.anding.shipvideo.adapter.VideosAdapter;
 import com.anding.shipvideo.data.ItemDatas;
 import com.anding.shipvideo.utils.DisplayAdaptive;
 import com.owen.adapter.CommonRecyclerViewAdapter;
@@ -39,7 +39,7 @@ public class VideosFragment extends BaseFragment {
         // 推荐使用此方法
         mRecyclerView.setSpacingWithMargins(30, 30);
 
-        mAdapter = new GridAdapter(getContext());
+        mAdapter = new VideosAdapter(getContext());
         mAdapter.setDatas(ItemDatas.getDatas(60));
         mRecyclerView.setAdapter(mAdapter);
 

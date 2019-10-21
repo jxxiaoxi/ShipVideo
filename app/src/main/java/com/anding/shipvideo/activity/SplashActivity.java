@@ -181,10 +181,10 @@ public class SplashActivity extends BaseActivity {
                 // List<Video> videos = JSON.parseArray(videosStr, Video.class);
                 List<Video> videos = new ArrayList<>();
                 for (int j = 0; j < 30; j++) {
-                    videos.add(new Video("http://1257476497.vod2.myqcloud.com/d11999f6vodcq1257476497/f8a941f95285890794792703672/wbbPyeKk43UA.mp4", "视频" + j, "http://132.232.111.161/storage/video/0.jpg", "0"));
+                    videos.add(new Video("http://1257476497.vod2.myqcloud.com/d11999f6vodcq1257476497/f8a941f95285890794792703672/wbbPyeKk43UA.mp4", "视频" + j,"这是关于船舶安全介绍1","http://132.232.111.161/storage/video/0.jpg", "0"));
                 }
                 for (int i = 0; i < videos.size(); i++) {
-                    LogUtils.d(TAG, "name ==> " + videos.get(i).getVname());
+                    LogUtils.d(TAG, "name ==> " + videos.get(i).getName());
                     DatabaseUtils.getInstance().insertVideo(videos.get(i));
                 }
             }
@@ -196,6 +196,8 @@ public class SplashActivity extends BaseActivity {
         });
 
     }
+
+
 
     private void showNeedNetWorkDialog() {
 //        new XPopup.Builder(this).asConfirm(getString(R.string.no_network_title),

@@ -17,26 +17,39 @@
 package com.anding.shipvideo.adapter;
 
 import android.content.Context;
+import android.util.Log;
+import android.widget.ImageView;
 
 import com.anding.shipvideo.R;
+import com.anding.shipvideo.ShipvideoApplication;
 import com.anding.shipvideo.data.ItemBean;
+import com.bumptech.glide.Glide;
 import com.owen.adapter.CommonRecyclerViewAdapter;
 import com.owen.adapter.CommonRecyclerViewHolder;
 
-public class ListAdapter extends CommonRecyclerViewAdapter<ItemBean> {
-    private boolean isMunu;
-    public ListAdapter(Context context, boolean isMunu) {
+public class VideosAdapter extends CommonRecyclerViewAdapter<ItemBean> {
+    public VideosAdapter(Context context) {
         super(context);
-        this.isMunu = isMunu;
     }
 
     @Override
     public int getItemLayoutId(int viewType) {
-        return isMunu ? R.layout.item_list_menu : R.layout.item2;
+        return R.layout.grid_item;
     }
 
     @Override
     public void onBindItemHolder(CommonRecyclerViewHolder helper, ItemBean item, int position) {
-        helper.getHolder().setText(R.id.title, (isMunu ? "菜单模式 " : "") + String.valueOf(position));
+//        helper.getHolder()
+//                .setText(R.id.title, "你大爷");
+        //视频的标题
+        helper.getHolder()
+                .setText(R.id.tv_changed, "你大爷");
+        //视频的图片
+        showImage(helper, R.id.image, item.imgUrl);
+    }
+    
+    public void showImage(CommonRecyclerViewHolder helper, int viewId, String url) {
+        ImageView imageView = helper.getHolder().getView(viewId);
+        Glide.with(ShipvideoApplication.getContext()).load(url).into(imageView);
     }
 }

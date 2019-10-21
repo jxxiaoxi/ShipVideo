@@ -21,8 +21,8 @@ import java.io.Serializable;
  */
 public class Category implements Serializable {
     private long id;
-    private String title;
-    private String description;
+    private String title;//视频类别名称
+    private String description;//视频类别描述
     private String bgImageUrl;
     private String cardImageUrl;
 

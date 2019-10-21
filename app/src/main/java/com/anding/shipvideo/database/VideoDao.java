@@ -24,10 +24,11 @@ public class VideoDao extends AbstractDao<Video, Void> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property Vid = new Property(0, String.class, "vid", false, "VID");
-        public final static Property Vname = new Property(1, String.class, "vname", false, "VNAME");
-        public final static Property Vpic = new Property(2, String.class, "vpic", false, "VPIC");
-        public final static Property Vcategory = new Property(3, String.class, "vcategory", false, "VCATEGORY");
+        public final static Property Uri = new Property(0, String.class, "uri", false, "URI");
+        public final static Property Name = new Property(1, String.class, "name", false, "NAME");
+        public final static Property Description = new Property(2, String.class, "description", false, "DESCRIPTION");
+        public final static Property Pic = new Property(3, String.class, "pic", false, "PIC");
+        public final static Property Category = new Property(4, String.class, "category", false, "CATEGORY");
     }
 
 
@@ -43,10 +44,11 @@ public class VideoDao extends AbstractDao<Video, Void> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"VIDEO\" (" + //
-                "\"VID\" TEXT," + // 0: vid
-                "\"VNAME\" TEXT," + // 1: vname
-                "\"VPIC\" TEXT," + // 2: vpic
-                "\"VCATEGORY\" TEXT);"); // 3: vcategory
+                "\"URI\" TEXT," + // 0: uri
+                "\"NAME\" TEXT," + // 1: name
+                "\"DESCRIPTION\" TEXT," + // 2: description
+                "\"PIC\" TEXT," + // 3: pic
+                "\"CATEGORY\" TEXT);"); // 4: category
     }
 
     /** Drops the underlying database table. */
@@ -59,24 +61,29 @@ public class VideoDao extends AbstractDao<Video, Void> {
     protected final void bindValues(DatabaseStatement stmt, Video entity) {
         stmt.clearBindings();
  
-        String vid = entity.getVid();
-        if (vid != null) {
-            stmt.bindString(1, vid);
+        String uri = entity.getUri();
+        if (uri != null) {
+            stmt.bindString(1, uri);
         }
  
-        String vname = entity.getVname();
-        if (vname != null) {
-            stmt.bindString(2, vname);
+        String name = entity.getName();
+        if (name != null) {
+            stmt.bindString(2, name);
         }
  
-        String vpic = entity.getVpic();
-        if (vpic != null) {
-            stmt.bindString(3, vpic);
+        String description = entity.getDescription();
+        if (description != null) {
+            stmt.bindString(3, description);
         }
  
-        String vcategory = entity.getVcategory();
-        if (vcategory != null) {
-            stmt.bindString(4, vcategory);
+        String pic = entity.getPic();
+        if (pic != null) {
+            stmt.bindString(4, pic);
+        }
+ 
+        String category = entity.getCategory();
+        if (category != null) {
+            stmt.bindString(5, category);
         }
     }
 
@@ -84,24 +91,29 @@ public class VideoDao extends AbstractDao<Video, Void> {
     protected final void bindValues(SQLiteStatement stmt, Video entity) {
         stmt.clearBindings();
  
-        String vid = entity.getVid();
-        if (vid != null) {
-            stmt.bindString(1, vid);
+        String uri = entity.getUri();
+        if (uri != null) {
+            stmt.bindString(1, uri);
         }
  
-        String vname = entity.getVname();
-        if (vname != null) {
-            stmt.bindString(2, vname);
+        String name = entity.getName();
+        if (name != null) {
+            stmt.bindString(2, name);
         }
  
-        String vpic = entity.getVpic();
-        if (vpic != null) {
-            stmt.bindString(3, vpic);
+        String description = entity.getDescription();
+        if (description != null) {
+            stmt.bindString(3, description);
         }
  
-        String vcategory = entity.getVcategory();
-        if (vcategory != null) {
-            stmt.bindString(4, vcategory);
+        String pic = entity.getPic();
+        if (pic != null) {
+            stmt.bindString(4, pic);
+        }
+ 
+        String category = entity.getCategory();
+        if (category != null) {
+            stmt.bindString(5, category);
         }
     }
 
@@ -113,20 +125,22 @@ public class VideoDao extends AbstractDao<Video, Void> {
     @Override
     public Video readEntity(Cursor cursor, int offset) {
         Video entity = new Video( //
-            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // vid
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // vname
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // vpic
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // vcategory
+            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // uri
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // description
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // pic
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // category
         );
         return entity;
     }
      
     @Override
     public void readEntity(Cursor cursor, Video entity, int offset) {
-        entity.setVid(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
-        entity.setVname(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setVpic(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setVcategory(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setUri(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
+        entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setDescription(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setPic(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setCategory(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
      }
     
     @Override
