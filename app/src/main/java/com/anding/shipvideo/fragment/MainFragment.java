@@ -40,6 +40,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anding.shipvideo.activity.SearchActivity;
 import com.anding.shipvideo.activity.VideosActivity;
 import com.anding.shipvideo.data.Category;
 import com.anding.shipvideo.presenter.CardPresenter;
@@ -185,8 +186,9 @@ public class MainFragment extends BrowseFragment {
 
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(), "Implement your own in-app search", Toast.LENGTH_LONG)
-                        .show();
+                startActivity(new Intent(getActivity(), SearchActivity.class));
+//                Toast.makeText(getActivity(), "Implement your own in-app search", Toast.LENGTH_LONG)
+//                        .show();
             }
         });
 
