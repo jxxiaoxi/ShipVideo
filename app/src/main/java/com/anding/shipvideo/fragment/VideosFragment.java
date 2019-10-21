@@ -1,10 +1,12 @@
 package com.anding.shipvideo.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.View;
 
 import com.anding.shipvideo.R;
+import com.anding.shipvideo.activity.PlaybackActivity;
 import com.anding.shipvideo.adapter.VideosAdapter;
 import com.anding.shipvideo.data.ItemDatas;
 import com.anding.shipvideo.utils.DisplayAdaptive;
@@ -59,6 +61,7 @@ public class VideosFragment extends BaseFragment {
             @Override
             public void onItemClick(TvRecyclerView parent, View itemView, int position) {
                 showToast("onItemClick::" + position);
+                gotoPlay();
             }
         });
 
@@ -87,6 +90,11 @@ public class VideosFragment extends BaseFragment {
                 return false; //是否还有更多数据
             }
         });*/
+    }
+
+    private void gotoPlay() {
+        Intent intent = new Intent(getActivity(), PlaybackActivity.class);
+        startActivity(intent);
     }
 
 }
