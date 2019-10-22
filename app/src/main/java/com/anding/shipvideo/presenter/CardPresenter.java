@@ -17,6 +17,7 @@ package com.anding.shipvideo.presenter;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
+import android.support.v17.leanback.widget.BaseCardView;
 import android.support.v17.leanback.widget.ImageCardView;
 import android.support.v17.leanback.widget.Presenter;
 import android.support.v4.content.ContextCompat;
@@ -75,20 +76,22 @@ public class CardPresenter extends Presenter {
 
         cardView.setFocusable(true);
         cardView.setFocusableInTouchMode(true);
+        cardView.setInfoVisibility(BaseCardView.CARD_REGION_VISIBLE_ALWAYS);
         updateCardBackgroundColor(cardView, false);
         return new ViewHolder(cardView);
     }
 
     @Override
     public void onBindViewHolder(Presenter.ViewHolder viewHolder, Object item) {
-        Category Category = (Category) item;
+        Category category = (Category) item;
         ImageCardView cardView = (ImageCardView) viewHolder.view;
-        if (Category.getCardImageUrl() != null) {
-            cardView.setTitleText(Category.getTitle());
+        if (category.getCardImageUrl() != null) {
+            cardView.setTitleText(category.getName());
             //  cardView.setContentText(Category.getStudio());
+            cardView.setContentText(category.getDescription());
             cardView.setMainImageDimensions(CARD_WIDTH, CARD_HEIGHT);
             Glide.with(viewHolder.view.getContext())
-                    .load(Category.getCardImageUrl())
+                    .load(category.getCardImageUrl())
                     .centerCrop()
                     .error(mDefaultCardImage)
                     .into(cardView.getMainImageView());

@@ -43,6 +43,7 @@ import android.widget.Toast;
 import com.anding.shipvideo.activity.SearchActivity;
 import com.anding.shipvideo.activity.VideosActivity;
 import com.anding.shipvideo.data.Category;
+import com.anding.shipvideo.manager.GlideBackgroundManager;
 import com.anding.shipvideo.presenter.CardPresenter;
 import com.anding.shipvideo.CategoryList;
 import com.anding.shipvideo.R;
@@ -71,6 +72,7 @@ public class MainFragment extends BrowseFragment {
     private Timer mBackgroundTimer;
     private String mBackgroundUri;
     private BackgroundManager mBackgroundManager;
+    private static GlideBackgroundManager picassoBackgroundManager = null;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -84,6 +86,14 @@ public class MainFragment extends BrowseFragment {
         loadRows();
 
         setupEventListeners();
+        setMianBg();
+    }
+
+    private void setMianBg() {
+
+        picassoBackgroundManager = new GlideBackgroundManager(getActivity());
+       // picassoBackgroundManager.updateBackgroundWithDelay("http://heimkehrend.raindrop.jp/kl-hacker/wp-content/uploads/2014/10/RIMG0656.jpg");
+        picassoBackgroundManager.updateBackgroundWithDelay("error");
     }
 
     @Override
@@ -99,19 +109,18 @@ public class MainFragment extends BrowseFragment {
         ArrayObjectAdapter rowsAdapter = new ArrayObjectAdapter(new ListRowPresenter());
         CardPresenter cardPresenter = new CardPresenter();
         //加载行业分类
-        initTradeCategoryRows(rowsAdapter,cardPresenter);
+        initTradeCategoryRows(rowsAdapter, cardPresenter);
         //加载安全类别分类
-        initTimeCategoryRows(rowsAdapter,cardPresenter);
+        initSecurityCategoryRows(rowsAdapter, cardPresenter);
         //加载工种分类
-        initRegionCategoryRows(rowsAdapter,cardPresenter);
+        initRegionCategoryRows(rowsAdapter, cardPresenter);
         //加载综合分类
-        initColligateCategoryRows(rowsAdapter,cardPresenter);
+        initColligateCategoryRows(rowsAdapter, cardPresenter);
 
     }
 
-    private void initTradeCategoryRows(ArrayObjectAdapter rowsAdapter,CardPresenter cardPresenter) {
+    private void initTradeCategoryRows(ArrayObjectAdapter rowsAdapter, CardPresenter cardPresenter) {
         List<Category> tradeList = CategoryList.setupTradeCategorys();
-
 
         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(cardPresenter);
         for (int j = 0; j < NUM_COLS; j++) {
@@ -122,7 +131,7 @@ public class MainFragment extends BrowseFragment {
         setAdapter(rowsAdapter);
     }
 
-    private void initTimeCategoryRows(ArrayObjectAdapter rowsAdapter,CardPresenter cardPresenter) {
+    private void initSecurityCategoryRows(ArrayObjectAdapter rowsAdapter, CardPresenter cardPresenter) {
         List<Category> tradeList = CategoryList.setupTradeCategorys();
 
         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(cardPresenter);
@@ -134,7 +143,7 @@ public class MainFragment extends BrowseFragment {
         setAdapter(rowsAdapter);
     }
 
-    private void initRegionCategoryRows(ArrayObjectAdapter rowsAdapter,CardPresenter cardPresenter) {
+    private void initRegionCategoryRows(ArrayObjectAdapter rowsAdapter, CardPresenter cardPresenter) {
         List<Category> tradeList = CategoryList.setupTradeCategorys();
 
         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(cardPresenter);
@@ -146,7 +155,7 @@ public class MainFragment extends BrowseFragment {
         setAdapter(rowsAdapter);
     }
 
-    private void initColligateCategoryRows(ArrayObjectAdapter rowsAdapter,CardPresenter cardPresenter) {
+    private void initColligateCategoryRows(ArrayObjectAdapter rowsAdapter, CardPresenter cardPresenter) {
         List<Category> tradeList = CategoryList.setupTradeCategorys();
         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(cardPresenter);
         for (int j = 0; j < NUM_COLS; j++) {
@@ -238,7 +247,7 @@ public class MainFragment extends BrowseFragment {
             } else if (item instanceof String) {
                 if (((String) item).contains(getString(R.string.error_fragment))) {
                     //Intent intent = new Intent(getActivity(), BrowseErrorActivity.class);
-                   // startActivity(intent);
+                    // startActivity(intent);
                 } else {
                     Toast.makeText(getActivity(), ((String) item), Toast.LENGTH_SHORT).show();
                 }

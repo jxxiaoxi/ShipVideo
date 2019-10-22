@@ -20,11 +20,10 @@ import java.io.Serializable;
  * Movie class represents video entity with title, description, image thumbs and video url.
  */
 public class Category implements Serializable {
-    private long id;
-    private String title;//视频类别名称
+    private long id;//种类
+    private String name;//视频类别名称
     private String description;//视频类别描述
-    private String bgImageUrl;
-    private String cardImageUrl;
+    private String cardImageUrl;//类别图
 
     public Category() {
     }
@@ -37,12 +36,12 @@ public class Category implements Serializable {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
@@ -53,13 +52,13 @@ public class Category implements Serializable {
         this.description = description;
     }
 
-    public String getBackgroundImageUrl() {
-        return bgImageUrl;
-    }
-
-    public void setBackgroundImageUrl(String bgImageUrl) {
-        this.bgImageUrl = bgImageUrl;
-    }
+//    public String getBackgroundImageUrl() {
+//        return bgImageUrl;
+//    }
+//
+//    public void setBackgroundImageUrl(String bgImageUrl) {
+//        this.bgImageUrl = bgImageUrl;
+//    }
     public String getCardImageUrl() {
         return cardImageUrl;
     }
@@ -72,7 +71,7 @@ public class Category implements Serializable {
     public String toString() {
         return "Movie{" +
                 "id=" + id +
-                ", title='" + title + '\'' +
+                ", title='" + name + '\'' +
                 '}';
     }
 }
