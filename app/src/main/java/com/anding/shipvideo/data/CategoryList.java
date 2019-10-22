@@ -12,7 +12,7 @@
  * the License.
  */
 
-package com.anding.shipvideo;
+package com.anding.shipvideo.data;
 
 
 import com.anding.shipvideo.data.Category;

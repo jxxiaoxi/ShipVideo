@@ -38,7 +38,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.SplashActivity" />
-        <activity android:name=".activity.DetailsActivity" />
         <activity android:name=".activity.PlaybackActivity">
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="landscape"

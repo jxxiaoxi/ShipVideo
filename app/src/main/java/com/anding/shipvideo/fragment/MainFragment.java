@@ -45,7 +45,7 @@ import com.anding.shipvideo.activity.VideosActivity;
 import com.anding.shipvideo.data.Category;
 import com.anding.shipvideo.manager.GlideBackgroundManager;
 import com.anding.shipvideo.presenter.CardPresenter;
-import com.anding.shipvideo.CategoryList;
+import com.anding.shipvideo.data.CategoryList;
 import com.anding.shipvideo.R;
 import com.anding.shipvideo.utils.Constants;
 import com.bumptech.glide.Glide;
