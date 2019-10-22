@@ -11,7 +11,6 @@ import com.owen.tvrecyclerview.widget.TvRecyclerView;
 import com.owen.focus.FocusBorder;
 
 public class VideosActivity extends FragmentActivity implements BaseFragment.FocusBorderHelper{
-    TvRecyclerView mRecyclerView;
     protected FocusBorder mFocusBorder;
 
     VideosFragment mFragment;

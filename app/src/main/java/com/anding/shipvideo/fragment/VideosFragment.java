@@ -8,7 +8,7 @@ import android.view.View;
 import com.anding.shipvideo.R;
 import com.anding.shipvideo.activity.PlaybackActivity;
 import com.anding.shipvideo.adapter.VideosAdapter;
-import com.anding.shipvideo.data.ItemDatas;
+import com.anding.shipvideo.manager.VideosManager;
 import com.anding.shipvideo.utils.DisplayAdaptive;
 import com.owen.adapter.CommonRecyclerViewAdapter;
 import com.owen.tvrecyclerview.widget.SimpleOnItemListener;
@@ -42,7 +42,8 @@ public class VideosFragment extends BaseFragment {
         mRecyclerView.setSpacingWithMargins(30, 30);
 
         mAdapter = new VideosAdapter(getContext());
-        mAdapter.setDatas(ItemDatas.getDatas(60));
+        //mAdapter.setDatas(ItemDatas.getDatas(60));
+        mAdapter.setDatas(VideosManager.getInstance().queryVideosByCategory(0));
         mRecyclerView.setAdapter(mAdapter);
 
     }

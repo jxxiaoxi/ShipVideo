@@ -17,36 +17,34 @@
 package com.anding.shipvideo.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.anding.shipvideo.R;
 import com.anding.shipvideo.ShipvideoApplication;
-import com.anding.shipvideo.data.ItemBean;
+import com.anding.shipvideo.data.Video;
 import com.bumptech.glide.Glide;
 import com.owen.adapter.CommonRecyclerViewAdapter;
 import com.owen.adapter.CommonRecyclerViewHolder;
 
-public class VideosAdapter extends CommonRecyclerViewAdapter<ItemBean> {
+public class VideosAdapter extends CommonRecyclerViewAdapter<Video> {
     public VideosAdapter(Context context) {
         super(context);
     }
 
     @Override
     public int getItemLayoutId(int viewType) {
-        return R.layout.grid_item;
+        return R.layout.item_videos;
     }
 
     @Override
-    public void onBindItemHolder(CommonRecyclerViewHolder helper, ItemBean item, int position) {
-//        helper.getHolder()
-//                .setText(R.id.title, "你大爷");
+    public void onBindItemHolder(CommonRecyclerViewHolder helper, Video item, int position) {
         //视频的标题
         helper.getHolder()
                 .setText(R.id.tv_changed, "你大爷");
         //视频的图片
-        showImage(helper, R.id.image, item.imgUrl);
+        showImage(helper, R.id.image, item.getPic());
     }
+
     
     public void showImage(CommonRecyclerViewHolder helper, int viewId, String url) {
         ImageView imageView = helper.getHolder().getView(viewId);

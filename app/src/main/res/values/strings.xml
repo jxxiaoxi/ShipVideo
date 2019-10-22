@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">ShipVideo</string>
-    <string name="browse_title"><![CDATA[欢迎加入安鼎!!!]]></string>
+    <string name="browse_title"><![CDATA[欢迎进入安鼎课堂!!!]]></string>
     <string name="related_movies">Related Videos</string>
     <string name="grid_view">Grid View</string>
     <string name="error_fragment">Error Fragment</string>

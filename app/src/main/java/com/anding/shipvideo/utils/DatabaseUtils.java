@@ -1,7 +1,5 @@
 package com.anding.shipvideo.utils;
 
-import android.text.TextUtils;
-
 import com.anding.shipvideo.ShipvideoApplication;
 import com.anding.shipvideo.data.Video;
 import com.anding.shipvideo.database.VideoDao;
@@ -39,7 +37,7 @@ public class DatabaseUtils {
 //        ShipvideoApplication.getDaoSession().getVideoDao().insertOrReplace(videos);
 //    }
 
-    public List<Video> queryVideosByCategory(String category) {
+    public List<Video> queryVideosByCategory(long category) {
         List<Video> videos = ShipvideoApplication.getDaoSession().getVideoDao().queryBuilder().where(VideoDao.Properties.Category.eq(category)).list();
         return videos;
     }

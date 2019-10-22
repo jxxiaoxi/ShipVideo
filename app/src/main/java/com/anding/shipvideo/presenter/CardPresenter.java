@@ -58,11 +58,6 @@ public class CardPresenter extends Presenter {
                 ContextCompat.getColor(parent.getContext(), R.color.default_background);
         sSelectedBackgroundColor =
                 ContextCompat.getColor(parent.getContext(), R.color.selected_background);
-        /*
-         * This template uses a default image in res/drawable, but the general case for Android TV
-         * will require your resources in xhdpi. For more information, see
-         * https://developer.android.com/training/tv/start/layouts.html#density-resources
-         */
         mDefaultCardImage = ContextCompat.getDrawable(parent.getContext(), R.drawable.movie);
 
         ImageCardView cardView =
@@ -85,6 +80,7 @@ public class CardPresenter extends Presenter {
     public void onBindViewHolder(Presenter.ViewHolder viewHolder, Object item) {
         Category category = (Category) item;
         ImageCardView cardView = (ImageCardView) viewHolder.view;
+        cardView.getMainImageView().setBackground(mDefaultCardImage);
         if (category.getCardImageUrl() != null) {
             cardView.setTitleText(category.getName());
             //  cardView.setContentText(Category.getStudio());

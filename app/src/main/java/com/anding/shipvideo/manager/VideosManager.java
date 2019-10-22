@@ -1,5 +1,6 @@
 package com.anding.shipvideo.manager;
 
+import com.anding.shipvideo.ShipvideoApplication;
 import com.anding.shipvideo.data.Video;
 import com.anding.shipvideo.utils.DatabaseUtils;
 
@@ -31,8 +32,15 @@ public class VideosManager {
     /*
      * 获取对应分类的视频
      * */
-    public List<Video> queryVideosByCategory(String category) {
+    public List<Video> queryVideosByCategory(long category) {
         List<Video> videos = DatabaseUtils.getInstance().queryVideosByCategory(category);
         return videos;
+    }
+
+    /*
+     * 插入视频到数据库
+     * */
+    public void insertVideo(Video video) {
+        DatabaseUtils.getInstance().insertVideo(video);
     }
 }

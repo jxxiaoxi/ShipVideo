@@ -12,20 +12,20 @@ public class Video implements Serializable {
     String name;//视频名称
     String description;//视频描述
     String pic;//视频简图
-    String category;//视频所属类别
-
-    @Generated(hash = 1856908545)
-    public Video(String uri, String name, String description, String pic,
-            String category) {
+    long category;//视频所属类别
+    @Generated(hash = 237528154)
+    public Video() {
+    }
+    @Generated(hash = 1609612767)
+    public Video(String uri, String name, String description, String pic, long category) {
         this.uri = uri;
         this.name = name;
         this.description = description;
         this.pic = pic;
         this.category = category;
     }
-
-    @Generated(hash = 237528154)
-    public Video() {
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
     public String getUri() {
@@ -60,11 +60,11 @@ public class Video implements Serializable {
         this.pic = pic;
     }
 
-    public String getCategory() {
+    public long getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(long category) {
         this.category = category;
     }
 }
