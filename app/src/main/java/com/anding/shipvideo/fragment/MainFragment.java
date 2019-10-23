@@ -131,7 +131,7 @@ public class MainFragment extends BrowseFragment {
     }
 
     private void initSecurityCategoryRows(ArrayObjectAdapter rowsAdapter, CardPresenter cardPresenter) {
-        List<Category> tradeList = CategoryList.setupTradeCategorys();
+        List<Category> tradeList = CategoryList.setupSecurityCategorys();
 
         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(cardPresenter);
         for (int j = 0; j < NUM_COLS; j++) {
@@ -143,7 +143,7 @@ public class MainFragment extends BrowseFragment {
     }
 
     private void initRegionCategoryRows(ArrayObjectAdapter rowsAdapter, CardPresenter cardPresenter) {
-        List<Category> tradeList = CategoryList.setupTradeCategorys();
+        List<Category> tradeList = CategoryList.setupRegionCategorys();
 
         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(cardPresenter);
         for (int j = 0; j < NUM_COLS; j++) {
@@ -155,7 +155,7 @@ public class MainFragment extends BrowseFragment {
     }
 
     private void initColligateCategoryRows(ArrayObjectAdapter rowsAdapter, CardPresenter cardPresenter) {
-        List<Category> tradeList = CategoryList.setupTradeCategorys();
+        List<Category> tradeList = CategoryList.setupColligateCategorys();
         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(cardPresenter);
         for (int j = 0; j < NUM_COLS; j++) {
             listRowAdapter.add(tradeList.get(j));

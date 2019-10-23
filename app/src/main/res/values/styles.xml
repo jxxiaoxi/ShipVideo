@@ -7,7 +7,7 @@
     <style name="TwoWayView" parent="TwoWayViewBase">
         <item name="android:orientation">horizontal</item>
         <item name="android:scrollbars">none</item>
-        <item name="android:background">#DDDD22</item>
+        <item name="android:background">@android:color/transparent</item>
         <item name="android:padding">20pt</item>
     </style>
     <style name="DialogStyle" parent="android:style/Theme.Dialog">

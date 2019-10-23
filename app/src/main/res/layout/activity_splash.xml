@@ -3,7 +3,7 @@
              android:layout_height="match_parent">
     <ImageView
         android:id="@+id/sp_bg"
-        android:src="@mipmap/gank8"
+        android:src="@drawable/splash_default"
         android:scaleType="centerCrop"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

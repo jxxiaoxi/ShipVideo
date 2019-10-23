@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.anding.shipvideo.R;
 import com.anding.shipvideo.data.Category;
+import com.anding.shipvideo.utils.LogUtils;
 import com.bumptech.glide.Glide;
 
 /*
@@ -37,8 +38,6 @@ import com.bumptech.glide.Glide;
 public class CardPresenter extends Presenter {
     private static final String TAG = "CardPresenter";
 
-    private static final int CARD_WIDTH = 500;
-    private static final int CARD_HEIGHT = 600;
     private static int sSelectedBackgroundColor;
     private static int sDefaultBackgroundColor;
     private Drawable mDefaultCardImage;
@@ -81,11 +80,13 @@ public class CardPresenter extends Presenter {
         Category category = (Category) item;
         ImageCardView cardView = (ImageCardView) viewHolder.view;
         cardView.getMainImageView().setBackground(mDefaultCardImage);
+        Context context = viewHolder.view.getContext();
         if (category.getCardImageUrl() != null) {
             cardView.setTitleText(category.getName());
             //  cardView.setContentText(Category.getStudio());
             cardView.setContentText(category.getDescription());
-            cardView.setMainImageDimensions(CARD_WIDTH, CARD_HEIGHT);
+
+            cardView.setMainImageDimensions(context.getResources().getDimensionPixelSize(R.dimen.card_width), context.getResources().getDimensionPixelSize(R.dimen.card_height));
             Glide.with(viewHolder.view.getContext())
                     .load(category.getCardImageUrl())
                     .centerCrop()
