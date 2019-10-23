@@ -72,31 +72,6 @@ public class HttpUtils {
 	}
 
 	/**
-	 * 判断网络是否可用
-	 *
-	 * @param context
-	 * @return
-	 */
-	public static boolean isNetworkAvailable(Context context) {
-		ConnectivityManager cm = (ConnectivityManager) context
-				.getSystemService(Context.CONNECTIVITY_SERVICE);
-		if (cm == null) {
-		} else {
-			//如果仅仅是用来判断网络连接
-			//则可以使用cm.getActiveNetworkInfo().isAvailable();
-			NetworkInfo[] info = cm.getAllNetworkInfo();
-			if (info != null) {
-				for (int i = 0; i < info.length; i++) {
-					if (info[i].getState() == NetworkInfo.State.CONNECTED) {
-						return true;
-					}
-				}
-			}
-		}
-		return false;
-	}
-
-	/**
 	 * get请求，同步方式，获取网络数据，是在主线程中执行的，需要新起线程，将其放到子线程中执行
 	 *
 	 * @param url

@@ -3,7 +3,9 @@ package com.anding.shipvideo.manager;
 import com.anding.shipvideo.ShipvideoApplication;
 import com.anding.shipvideo.data.Video;
 import com.anding.shipvideo.utils.DatabaseUtils;
+import com.anding.shipvideo.utils.LogUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VideosManager {
@@ -34,6 +36,7 @@ public class VideosManager {
      * */
     public List<Video> queryVideosByCategory(long category) {
         List<Video> videos = DatabaseUtils.getInstance().queryVideosByCategory(category);
+        LogUtils.d("liuwei", "queryVideosByCategory--->" + videos.size());
         return videos;
     }
 
@@ -42,5 +45,26 @@ public class VideosManager {
      * */
     public void insertVideo(Video video) {
         DatabaseUtils.getInstance().insertVideo(video);
+    }
+
+    /*
+     * 批量插入视频到数据库
+     * */
+    public void insertVideos(ArrayList<Video> videos) {
+        DatabaseUtils.getInstance().insertVideos(videos);
+    }
+
+    /*
+     * 批量删除视频
+     * */
+    public void deleteVideos(ArrayList<Video> videos) {
+        DatabaseUtils.getInstance().deleteVideos(videos);
+    }
+
+    /*
+     * 删除所有视频
+     * */
+    public void deleteAllVideos() {
+        DatabaseUtils.getInstance().deleteAllVideos();
     }
 }
