@@ -1,12 +1,12 @@
 package com.anding.shipvideo.fragment;
 
 import android.os.Bundle;
-import android.support.v17.leanback.app.SearchSupportFragment;
-import android.support.v17.leanback.widget.ArrayObjectAdapter;
-import android.support.v17.leanback.widget.ListRowPresenter;
-import android.support.v17.leanback.widget.ObjectAdapter;
 
 import com.anding.shipvideo.utils.LogUtils;
+import com.wzq.leanback.app.SearchSupportFragment;
+import com.wzq.leanback.widget.ArrayObjectAdapter;
+import com.wzq.leanback.widget.ListRowPresenter;
+import com.wzq.leanback.widget.ObjectAdapter;
 
 public class SearchVideoFragment extends SearchSupportFragment implements  SearchSupportFragment.SearchResultProvider{
     private ArrayObjectAdapter mRowsAdapter;

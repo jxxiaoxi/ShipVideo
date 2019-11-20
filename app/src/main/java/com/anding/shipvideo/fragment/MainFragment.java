@@ -20,17 +20,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 
-import android.support.v17.leanback.app.BackgroundManager;
-import android.support.v17.leanback.app.BrowseFragment;
-import android.support.v17.leanback.widget.ArrayObjectAdapter;
-import android.support.v17.leanback.widget.HeaderItem;
-import android.support.v17.leanback.widget.ListRow;
-import android.support.v17.leanback.widget.ListRowPresenter;
-import android.support.v17.leanback.widget.OnItemViewClickedListener;
-import android.support.v17.leanback.widget.OnItemViewSelectedListener;
-import android.support.v17.leanback.widget.Presenter;
-import android.support.v17.leanback.widget.Row;
-import android.support.v17.leanback.widget.RowPresenter;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -51,6 +40,18 @@ import com.anding.shipvideo.utils.Constants;
 
 import java.util.List;
 import java.util.Timer;
+
+import com.wzq.leanback.app.BackgroundManager;
+import com.wzq.leanback.app.BrowseFragment;
+import com.wzq.leanback.widget.ArrayObjectAdapter;
+import com.wzq.leanback.widget.HeaderItem;
+import com.wzq.leanback.widget.ListRow;
+import com.wzq.leanback.widget.ListRowPresenter;
+import com.wzq.leanback.widget.OnItemViewClickedListener;
+import com.wzq.leanback.widget.OnItemViewSelectedListener;
+import com.wzq.leanback.widget.Presenter;
+import com.wzq.leanback.widget.Row;
+import com.wzq.leanback.widget.RowPresenter;
 
 public class MainFragment extends BrowseFragment {
     private static final String TAG = "MainFragment";

@@ -18,9 +18,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 
-import android.support.v17.leanback.widget.BaseCardView;
-import android.support.v17.leanback.widget.ImageCardView;
-import android.support.v17.leanback.widget.Presenter;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
@@ -32,6 +29,9 @@ import com.anding.shipvideo.R;
 import com.anding.shipvideo.data.Category;
 import com.anding.shipvideo.utils.LogUtils;
 import com.bumptech.glide.Glide;
+import com.wzq.leanback.widget.BaseCardView;
+import com.wzq.leanback.widget.ImageCardView;
+import com.wzq.leanback.widget.Presenter;
 
 /*
  * A CardPresenter is used to generate Views and bind Objects to them on demand.
