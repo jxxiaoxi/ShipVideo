@@ -9,6 +9,7 @@
     android:id="@+id/main_browse_fragment"
     android:name="com.anding.shipvideo.fragment.MainFragment"
     android:layout_width="match_parent"
+    android:theme="@style/Theme.Leanback"
     android:layout_height="match_parent"
     tools:context=".activity.MainActivity"
     tools:deviceIds="tv"

@@ -48,14 +48,9 @@ import com.anding.shipvideo.presenter.CardPresenter;
 import com.anding.shipvideo.data.CategoryList;
 import com.anding.shipvideo.R;
 import com.anding.shipvideo.utils.Constants;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.GlideDrawable;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
 
 import java.util.List;
 import java.util.Timer;
-import java.util.TimerTask;
 
 public class MainFragment extends BrowseFragment {
     private static final String TAG = "MainFragment";
@@ -78,7 +73,6 @@ public class MainFragment extends BrowseFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         Log.i(TAG, "onCreate");
         super.onActivityCreated(savedInstanceState);
-
 
         setupUIElements();
 
@@ -168,13 +162,13 @@ public class MainFragment extends BrowseFragment {
     private void setupUIElements() {
         setTitle(getString(R.string.browse_title)); // Badge, when set, takes precedent
         // over title
-        setHeadersState(HEADERS_ENABLED);
+        setHeadersState(HEADERS_ENABLED);//设置侧边栏显示状态 enabled 可见
         setHeadersTransitionOnBackEnabled(true);
-
+        //getTitleView().setBackgroundColor(getResources().getColor(R.color.red));//整个上面的tietle区
         // set fastLane (or headers) background color
-        setBrandColor(ContextCompat.getColor(getActivity(), R.color.fastlane_background));
+        setBrandColor(ContextCompat.getColor(getActivity(), R.color.fastlane_background)); //设置快速通道（侧边栏）背景
         // set search icon color
-        setSearchAffordanceColor(ContextCompat.getColor(getActivity(), R.color.search_opaque));
+        setSearchAffordanceColor(ContextCompat.getColor(getActivity(), R.color.search_opaque));//搜索图标颜色
     }
 
     private void setupEventListeners() {

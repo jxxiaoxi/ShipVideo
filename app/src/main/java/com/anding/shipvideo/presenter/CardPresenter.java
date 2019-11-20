@@ -15,6 +15,7 @@
 package com.anding.shipvideo.presenter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 
 import android.support.v17.leanback.widget.BaseCardView;
@@ -24,6 +25,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anding.shipvideo.R;
@@ -46,7 +48,7 @@ public class CardPresenter extends Presenter {
         int color = selected ? sSelectedBackgroundColor : sDefaultBackgroundColor;
         // Both background colors should be set because the view's background is temporarily visible
         // during animations.
-        view.setBackgroundColor(color);
+        view.setBackgroundColor(Color.RED);
         view.findViewById(R.id.info_field).setBackgroundColor(color);
     }
 
@@ -69,6 +71,8 @@ public class CardPresenter extends Presenter {
                 };
 
         cardView.setFocusable(true);
+        TextView aa= (TextView)cardView.findViewById(R.id.title_text);
+        //aa.setTextSize(40);//标题字体的大小
         cardView.setFocusableInTouchMode(true);
         cardView.setInfoVisibility(BaseCardView.CARD_REGION_VISIBLE_ALWAYS);
         updateCardBackgroundColor(cardView, false);
