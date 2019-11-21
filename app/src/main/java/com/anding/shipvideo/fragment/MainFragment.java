@@ -36,11 +36,13 @@ import com.anding.shipvideo.manager.GlideBackgroundManager;
 import com.anding.shipvideo.presenter.CardPresenter;
 import com.anding.shipvideo.data.CategoryList;
 import com.anding.shipvideo.R;
+import com.anding.shipvideo.presenter.IconHeaderItemPresenter;
 import com.anding.shipvideo.utils.Constants;
 
 import java.util.List;
 import java.util.Timer;
 
+import com.anding.shipvideo.utils.LogUtils;
 import com.wzq.leanback.app.BackgroundManager;
 import com.wzq.leanback.app.BrowseFragment;
 import com.wzq.leanback.widget.ArrayObjectAdapter;
@@ -50,6 +52,7 @@ import com.wzq.leanback.widget.ListRowPresenter;
 import com.wzq.leanback.widget.OnItemViewClickedListener;
 import com.wzq.leanback.widget.OnItemViewSelectedListener;
 import com.wzq.leanback.widget.Presenter;
+import com.wzq.leanback.widget.PresenterSelector;
 import com.wzq.leanback.widget.Row;
 import com.wzq.leanback.widget.RowPresenter;
 
@@ -84,9 +87,8 @@ public class MainFragment extends BrowseFragment {
     }
 
     private void setMianBg() {
-
         picassoBackgroundManager = new GlideBackgroundManager(getActivity());
-       // picassoBackgroundManager.updateBackgroundWithDelay("http://heimkehrend.raindrop.jp/kl-hacker/wp-content/uploads/2014/10/RIMG0656.jpg");
+        // picassoBackgroundManager.updateBackgroundWithDelay("http://heimkehrend.raindrop.jp/kl-hacker/wp-content/uploads/2014/10/RIMG0656.jpg");
         picassoBackgroundManager.updateBackgroundWithDelay("error");
     }
 
@@ -170,6 +172,13 @@ public class MainFragment extends BrowseFragment {
         setBrandColor(ContextCompat.getColor(getActivity(), R.color.fastlane_background)); //设置快速通道（侧边栏）背景
         // set search icon color
         setSearchAffordanceColor(ContextCompat.getColor(getActivity(), R.color.search_opaque));//搜索图标颜色
+//客制化
+//        setHeaderPresenterSelector(new PresenterSelector() {
+//            @Override
+//            public Presenter getPresenter(Object o) {
+//                return new IconHeaderItemPresenter();
+//            }
+//        });
     }
 
     private void setupEventListeners() {
@@ -218,34 +227,34 @@ public class MainFragment extends BrowseFragment {
             Log.d(TAG, "ItemViewSelectedListener" + row.getId() + "-->" + row.getHeaderItem().getName() + "  " + row.getHeaderItem().getId());
             if (item instanceof Category) {
                 // mBackgroundUri = ((Category) item).getBackgroundImageUrl();
-              //  startBackgroundTimer();
+                //  startBackgroundTimer();
             }
         }
     }
 
 
-    private class GridItemPresenter extends Presenter {
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent) {
-            TextView view = new TextView(parent.getContext());
-            view.setLayoutParams(new ViewGroup.LayoutParams(GRID_ITEM_WIDTH, GRID_ITEM_HEIGHT));
-            view.setFocusable(true);
-            view.setFocusableInTouchMode(true);
-            view.setBackgroundColor(
-                    ContextCompat.getColor(getActivity(), R.color.default_background));
-            view.setTextColor(Color.WHITE);
-            view.setGravity(Gravity.CENTER);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder viewHolder, Object item) {
-            ((TextView) viewHolder.view).setText((String) item);
-        }
-
-        @Override
-        public void onUnbindViewHolder(ViewHolder viewHolder) {
-        }
-    }
+//    private class GridItemPresenter extends Presenter {
+//        @Override
+//        public ViewHolder onCreateViewHolder(ViewGroup parent) {
+//            TextView view = new TextView(parent.getContext());
+//            view.setLayoutParams(new ViewGroup.LayoutParams(GRID_ITEM_WIDTH, GRID_ITEM_HEIGHT));
+//            view.setFocusable(true);
+//            view.setFocusableInTouchMode(true);
+//            view.setBackgroundColor(
+//                    ContextCompat.getColor(getActivity(), R.color.default_background));
+//            view.setTextColor(Color.WHITE);
+//            view.setGravity(Gravity.CENTER);
+//            return new ViewHolder(view);
+//        }
+//
+//        @Override
+//        public void onBindViewHolder(ViewHolder viewHolder, Object item) {
+//            ((TextView) viewHolder.view).setText((String) item);
+//        }
+//
+//        @Override
+//        public void onUnbindViewHolder(ViewHolder viewHolder) {
+//        }
+//    }
 
 }
