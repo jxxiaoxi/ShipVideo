@@ -40,7 +40,7 @@ public class VideosAdapter extends CommonRecyclerViewAdapter<Video> {
     public void onBindItemHolder(CommonRecyclerViewHolder helper, Video item, int position) {
         //视频的标题
         helper.getHolder()
-                .setText(R.id.tv_changed, "你大爷");
+                .setText(R.id.tv_changed, item.getName());
         //视频的图片
         showImage(helper, R.id.image, item.getPic());
     }

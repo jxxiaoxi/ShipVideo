@@ -112,7 +112,7 @@ public class SplashActivity extends BaseActivity {
                 public void run() {
                     gotoMainActivity();
                 }
-            }, 3000);
+            }, 4000);
         }
     }
 
@@ -183,7 +183,7 @@ public class SplashActivity extends BaseActivity {
                 VideosManager.getInstance().deleteAllVideos();
                 ArrayList<Video> videos = new ArrayList<>();
                 for (int j = 0; j < 30; j++) {
-                    videos.add(new Video("http://1257476497.vod2.myqcloud.com/d11999f6vodcq1257476497/f8a941f95285890794792703672/wbbPyeKk43UA.mp4", "视频" + j,"这是关于船舶安全介绍1","http://132.232.111.161/storage/video/0.jpg", 0));
+                    videos.add(new Video("http://1257476497.vod2.myqcloud.com/d11999f6vodcq1257476497/f8a941f95285890794792703672/wbbPyeKk43UA.mp4", "船舶安全视频" + j,"这是关于船舶安全介绍"+j,"http://132.232.111.161/storage/video/0.jpg", 0));
                 }
                 VideosManager.getInstance().insertVideos(videos);
 //                for (int i = 0; i < videos.size(); i++) {

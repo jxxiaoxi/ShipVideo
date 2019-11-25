@@ -1,6 +1,7 @@
 package com.anding.shipvideo.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.anding.shipvideo.utils.LogUtils;
 import com.wzq.leanback.app.SearchSupportFragment;
@@ -22,11 +23,13 @@ public class SearchVideoFragment extends SearchSupportFragment implements  Searc
 
     @Override
     public boolean onQueryTextChange(String s) {
+        Log.d(TAG,"onQueryTextChange : "+s);
         return false;
     }
 
     @Override
     public boolean onQueryTextSubmit(String s) {
+        Log.d(TAG,"onQueryTextSubmit : "+s);
         return false;
     }
 
@@ -45,4 +48,6 @@ public class SearchVideoFragment extends SearchSupportFragment implements  Searc
 
         return mRowsAdapter;
     }
+
+
 }

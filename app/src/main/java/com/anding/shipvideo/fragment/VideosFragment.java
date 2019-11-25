@@ -45,7 +45,6 @@ public class VideosFragment extends BaseFragment {
         //mAdapter.setDatas(ItemDatas.getDatas(60));
         mAdapter.setDatas(VideosManager.getInstance().queryVideosByCategory(0));
         mRecyclerView.setAdapter(mAdapter);
-
     }
 
     private void setListener() {
