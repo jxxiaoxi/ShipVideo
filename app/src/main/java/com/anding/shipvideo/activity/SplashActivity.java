@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.alibaba.fastjson.JSON;
 import com.anding.shipvideo.R;
 import com.anding.shipvideo.data.Splash;
 import com.anding.shipvideo.data.Video;
@@ -22,7 +23,6 @@ import com.bumptech.glide.Glide;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Call;
@@ -179,17 +179,17 @@ public class SplashActivity extends BaseActivity {
                 // 2 解析JSON数据
                 String videosStr = response.body().string();
                 LogUtils.d(TAG, "initVideosFromRemote success==> " + videosStr);
-                // List<Video> videos = JSON.parseArray(videosStr, Video.class);
+                 List<Video> videos = JSON.parseArray(videosStr, Video.class);
                 VideosManager.getInstance().deleteAllVideos();
-                ArrayList<Video> videos = new ArrayList<>();
-                for (int j = 0; j < 30; j++) {
-                    videos.add(new Video("http://1257476497.vod2.myqcloud.com/d11999f6vodcq1257476497/f8a941f95285890794792703672/wbbPyeKk43UA.mp4", "船舶安全视频" + j,"这是关于船舶安全介绍"+j,"http://132.232.111.161/storage/video/0.jpg", 0));
-                }
-                VideosManager.getInstance().insertVideos(videos);
-//                for (int i = 0; i < videos.size(); i++) {
-//                    LogUtils.d(TAG, "name ==> " + videos.get(i).getName());
-//                    DatabaseUtils.getInstance().insertVideo(videos.get(i));
+//                ArrayList<Video> videos = new ArrayList<>();
+//                for (int j = 0; j < videos.size(); j++) {
+//                    videos.add(new Video("http://1257476497.vod2.myqcloud.com/d11999f6vodcq1257476497/f8a941f95285890794792703672/wbbPyeKk43UA.mp4", "船舶安全视频" + j,"这是关于船舶安全介绍"+j,"http://132.232.111.161/storage/video/0.jpg", 0));
 //                }
+//                VideosManager.getInstance().insertVideos(videos);
+                for (int i = 0; i < videos.size(); i++) {
+                    LogUtils.d(TAG, "name ==> " + videos.get(i).getVname());
+                    DatabaseUtils.getInstance().insertVideo(videos.get(i));
+                }
             }
 
             @Override

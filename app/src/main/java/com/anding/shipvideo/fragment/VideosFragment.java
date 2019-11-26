@@ -8,14 +8,19 @@ import android.view.View;
 import com.anding.shipvideo.R;
 import com.anding.shipvideo.activity.PlaybackActivity;
 import com.anding.shipvideo.adapter.VideosAdapter;
+import com.anding.shipvideo.data.Video;
 import com.anding.shipvideo.manager.VideosManager;
 import com.anding.shipvideo.utils.DisplayAdaptive;
+import com.anding.shipvideo.utils.LogUtils;
 import com.owen.adapter.CommonRecyclerViewAdapter;
 import com.owen.tvrecyclerview.widget.SimpleOnItemListener;
 import com.owen.tvrecyclerview.widget.TvRecyclerView;
 
+import java.util.List;
+
 public class VideosFragment extends BaseFragment {
     TvRecyclerView mRecyclerView;
+    List<Video> videos;
     private CommonRecyclerViewAdapter mAdapter;
 
     public static VideosFragment newInstance() {
@@ -43,8 +48,13 @@ public class VideosFragment extends BaseFragment {
 
         mAdapter = new VideosAdapter(getContext());
         //mAdapter.setDatas(ItemDatas.getDatas(60));
-        mAdapter.setDatas(VideosManager.getInstance().queryVideosByCategory(0));
-        mRecyclerView.setAdapter(mAdapter);
+        //mAdapter.setDatas(VideosManager.getInstance().queryVideosByCategory(0));
+        videos =  VideosManager.getInstance().queryAll();
+        if(videos != null) {
+            LogUtils.d("liuwei", "video size ---> " + videos.size());
+            mAdapter.setDatas(videos);
+            mRecyclerView.setAdapter(mAdapter);
+        }
     }
 
     private void setListener() {
@@ -60,8 +70,8 @@ public class VideosFragment extends BaseFragment {
 
             @Override
             public void onItemClick(TvRecyclerView parent, View itemView, int position) {
-                showToast("onItemClick::" + position);
-                gotoPlay();
+               // showToast("onItemClick::" + position);
+                gotoPlay(position);
             }
         });
 
@@ -92,9 +102,15 @@ public class VideosFragment extends BaseFragment {
         });*/
     }
 
-    private void gotoPlay() {
-        Intent intent = new Intent(getActivity(), PlaybackActivity.class);
-        startActivity(intent);
+    private void gotoPlay(int position) {
+        if(videos!= null &&  position <= videos.size()) {
+            Video video = videos.get(position);
+            Intent intent = new Intent(getActivity(), PlaybackActivity.class);
+            intent.putExtra("title",video.getVname());
+            intent.putExtra("uri",video.getVid());
+            intent.putExtra("pic",video.getVpic());
+            startActivity(intent);
+        }
     }
 
 }

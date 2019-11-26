@@ -71,8 +71,10 @@ public class CardPresenter extends Presenter {
                 };
 
         cardView.setFocusable(true);
-        TextView aa= (TextView)cardView.findViewById(R.id.title_text);
-        //aa.setTextSize(40);//标题字体的大小
+        TextView title_= (TextView)cardView.findViewById(R.id.title_text);
+        title_.setTextSize(32);//标题字体的大小
+        TextView content= (TextView)cardView.findViewById(R.id.content_text);
+        content.setTextSize(26);//标题字体的大小
         cardView.setFocusableInTouchMode(true);
         cardView.setInfoVisibility(BaseCardView.CARD_REGION_VISIBLE_ALWAYS);
         updateCardBackgroundColor(cardView, false);

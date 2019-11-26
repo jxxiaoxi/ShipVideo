@@ -1,6 +1,5 @@
 package com.anding.shipvideo.manager;
 
-import com.anding.shipvideo.ShipvideoApplication;
 import com.anding.shipvideo.data.Video;
 import com.anding.shipvideo.utils.DatabaseUtils;
 import com.anding.shipvideo.utils.LogUtils;
@@ -31,14 +30,14 @@ public class VideosManager {
         return videos;
     }
 
-    /*
-     * 获取对应分类的视频
-     * */
-    public List<Video> queryVideosByCategory(long category) {
-        List<Video> videos = DatabaseUtils.getInstance().queryVideosByCategory(category);
-        LogUtils.d("liuwei", "queryVideosByCategory--->" + videos.size());
-        return videos;
-    }
+//    /*
+//     * 获取对应分类的视频
+//     * */
+//    public List<Video> queryVideosByCategory(long category) {
+//        List<Video> videos = DatabaseUtils.getInstance().queryVideosByCategory(category);
+//        LogUtils.d("liuwei", "queryVideosByCategory--->" + videos.size());
+//        return videos;
+//    }
 
     /*
      * 插入视频到数据库
@@ -50,7 +49,7 @@ public class VideosManager {
     /*
      * 批量插入视频到数据库
      * */
-    public void insertVideos(ArrayList<Video> videos) {
+    public void insertVideos(List<Video> videos) {
         DatabaseUtils.getInstance().insertVideos(videos);
     }
 

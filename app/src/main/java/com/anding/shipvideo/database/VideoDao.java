@@ -24,11 +24,9 @@ public class VideoDao extends AbstractDao<Video, Void> {
      * Can be used for QueryBuilder and for referencing column names.
      */
     public static class Properties {
-        public final static Property Uri = new Property(0, String.class, "uri", false, "URI");
-        public final static Property Name = new Property(1, String.class, "name", false, "NAME");
-        public final static Property Description = new Property(2, String.class, "description", false, "DESCRIPTION");
-        public final static Property Pic = new Property(3, String.class, "pic", false, "PIC");
-        public final static Property Category = new Property(4, long.class, "category", false, "CATEGORY");
+        public final static Property Vid = new Property(0, String.class, "vid", false, "VID");
+        public final static Property Vname = new Property(1, String.class, "vname", false, "VNAME");
+        public final static Property Vpic = new Property(2, String.class, "vpic", false, "VPIC");
     }
 
 
@@ -44,11 +42,9 @@ public class VideoDao extends AbstractDao<Video, Void> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"VIDEO\" (" + //
-                "\"URI\" TEXT," + // 0: uri
-                "\"NAME\" TEXT," + // 1: name
-                "\"DESCRIPTION\" TEXT," + // 2: description
-                "\"PIC\" TEXT," + // 3: pic
-                "\"CATEGORY\" INTEGER NOT NULL );"); // 4: category
+                "\"VID\" TEXT," + // 0: vid
+                "\"VNAME\" TEXT," + // 1: vname
+                "\"VPIC\" TEXT);"); // 2: vpic
     }
 
     /** Drops the underlying database table. */
@@ -61,52 +57,40 @@ public class VideoDao extends AbstractDao<Video, Void> {
     protected final void bindValues(DatabaseStatement stmt, Video entity) {
         stmt.clearBindings();
  
-        String uri = entity.getUri();
-        if (uri != null) {
-            stmt.bindString(1, uri);
+        String vid = entity.getVid();
+        if (vid != null) {
+            stmt.bindString(1, vid);
         }
  
-        String name = entity.getName();
-        if (name != null) {
-            stmt.bindString(2, name);
+        String vname = entity.getVname();
+        if (vname != null) {
+            stmt.bindString(2, vname);
         }
  
-        String description = entity.getDescription();
-        if (description != null) {
-            stmt.bindString(3, description);
+        String vpic = entity.getVpic();
+        if (vpic != null) {
+            stmt.bindString(3, vpic);
         }
- 
-        String pic = entity.getPic();
-        if (pic != null) {
-            stmt.bindString(4, pic);
-        }
-        stmt.bindLong(5, entity.getCategory());
     }
 
     @Override
     protected final void bindValues(SQLiteStatement stmt, Video entity) {
         stmt.clearBindings();
  
-        String uri = entity.getUri();
-        if (uri != null) {
-            stmt.bindString(1, uri);
+        String vid = entity.getVid();
+        if (vid != null) {
+            stmt.bindString(1, vid);
         }
  
-        String name = entity.getName();
-        if (name != null) {
-            stmt.bindString(2, name);
+        String vname = entity.getVname();
+        if (vname != null) {
+            stmt.bindString(2, vname);
         }
  
-        String description = entity.getDescription();
-        if (description != null) {
-            stmt.bindString(3, description);
+        String vpic = entity.getVpic();
+        if (vpic != null) {
+            stmt.bindString(3, vpic);
         }
- 
-        String pic = entity.getPic();
-        if (pic != null) {
-            stmt.bindString(4, pic);
-        }
-        stmt.bindLong(5, entity.getCategory());
     }
 
     @Override
@@ -117,22 +101,18 @@ public class VideoDao extends AbstractDao<Video, Void> {
     @Override
     public Video readEntity(Cursor cursor, int offset) {
         Video entity = new Video( //
-            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // uri
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // name
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // description
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // pic
-            cursor.getLong(offset + 4) // category
+            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // vid
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // vname
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2) // vpic
         );
         return entity;
     }
      
     @Override
     public void readEntity(Cursor cursor, Video entity, int offset) {
-        entity.setUri(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
-        entity.setName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setDescription(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setPic(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setCategory(cursor.getLong(offset + 4));
+        entity.setVid(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
+        entity.setVname(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setVpic(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
      }
     
     @Override

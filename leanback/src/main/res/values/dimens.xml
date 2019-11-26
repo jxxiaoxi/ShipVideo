@@ -317,5 +317,5 @@
     <dimen name="lb_page_indicator_dot_gap">16dp</dimen>
     <dimen name="lb_onboarding_start_button_translation_offset">16dp</dimen>
     <!-- header 字体大小-->
-    <dimen name="lb_header_text_size">20dp</dimen>
+    <dimen name="lb_header_text_size">30dp</dimen>
 </resources>

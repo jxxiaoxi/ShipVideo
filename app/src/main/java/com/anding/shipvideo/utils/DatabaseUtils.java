@@ -27,7 +27,7 @@ public class DatabaseUtils {
         ShipvideoApplication.getDaoSession().getVideoDao().insertOrReplace(video);
     }
 
-    public void insertVideos(ArrayList<Video> videos) {
+    public void insertVideos(List<Video> videos) {
         ShipvideoApplication.getDaoSession().getVideoDao().insertOrReplaceInTx(videos);
     }
 
@@ -43,10 +43,10 @@ public class DatabaseUtils {
 //        ShipvideoApplication.getDaoSession().getVideoDao().insertOrReplace(videos);
 //    }
 
-    public List<Video> queryVideosByCategory(long category) {
-        List<Video> videos = ShipvideoApplication.getDaoSession().getVideoDao().queryBuilder().where(VideoDao.Properties.Category.eq(category)).list();
-        return videos;
-    }
+//    public List<Video> queryVideosByCategory(long category) {
+//        List<Video> videos = ShipvideoApplication.getDaoSession().getVideoDao().queryBuilder().where(VideoDao.Properties.Category.eq(category)).list();
+//        return videos;
+//    }
     /*
      * 删除所有的视频
      * */

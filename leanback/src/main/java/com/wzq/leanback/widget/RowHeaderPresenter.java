@@ -95,7 +95,9 @@ public class RowHeaderPresenter extends Presenter {
         public ViewHolder(View view) {
             super(view);
             mTitleView = (RowHeaderView)view.findViewById(R.id.row_header);
-           // mTitleView.setTextSize(view.getResources().getDimension(R.dimen.lb_header_text_size));
+            if(mTitleView != null) {
+                mTitleView.setTextSize(view.getResources().getDimension(R.dimen.lb_header_text_size));
+            }
             mDescriptionView = (TextView)view.findViewById(R.id.row_header_description);
             initColors();
         }

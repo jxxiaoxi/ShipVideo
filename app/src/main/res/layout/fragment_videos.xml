@@ -8,7 +8,7 @@
     android:layout_marginTop="20dp"
     android:layout_marginLeft="40dp"
     android:text="所有船舶安全视频"
-    android:textSize="30dp"
+    android:textSize="35dp"
     android:layout_height="wrap_content" />
 
     <com.owen.tvrecyclerview.widget.TvRecyclerView xmlns:app="http://schemas.android.com/apk/res-auto"
