@@ -670,6 +670,7 @@ public abstract class Jzvd extends FrameLayout implements View.OnClickListener, 
         return position;
     }
 
+    //总时长
     public long getDuration() {
         long duration = 0;
         try {
@@ -1008,4 +1009,14 @@ public abstract class Jzvd extends FrameLayout implements View.OnClickListener, 
         }
     }
 
+    /*
+     * 快进快退功能
+     * */
+    public void seekToTime(long seekTime) {
+        if (state != STATE_PLAYING &&
+                state != STATE_PAUSE) return;
+        long time = progressBar.getProgress() * getDuration() / 100;
+        //Log.d("liuwei", "mSeekTimePosition --> " + mSeekTimePosition + "   ;Duration : " + getDuration() + "  ;time : " + time);
+        mediaInterface.seekTo(time + seekTime);
+    }
 }

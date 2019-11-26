@@ -30,17 +30,18 @@ import com.anding.videopalyer.Jzvd;
 import com.bumptech.glide.Glide;
 
 
-import static android.media.session.PlaybackState.STATE_BUFFERING;
-import static android.media.session.PlaybackState.STATE_FAST_FORWARDING;
-import static android.media.session.PlaybackState.STATE_PLAYING;
-import static android.media.session.PlaybackState.STATE_REWINDING;
+import static com.anding.videopalyer.Jzvd.STATE_AUTO_COMPLETE;
 import static com.anding.videopalyer.Jzvd.STATE_NORMAL;
+import static com.anding.videopalyer.Jzvd.STATE_PAUSE;
+import static com.anding.videopalyer.Jzvd.STATE_PLAYING;
+import static com.anding.videopalyer.Jzvd.STATE_PREPARED;
 
 /**
  * Loads {@link PlaybackVideoFragment}.
  */
 public class PlaybackActivity extends FragmentActivity {
     private Player mJzvdStd;
+    public static final long SEEK_TIME = 20000;//快进退的间隔时间
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,7 @@ public class PlaybackActivity extends FragmentActivity {
 //                    .replace(android.R.id.content, new PlaybackVideoFragment())
 //                    .commit();
 //        }
-        mJzvdStd = (Player) findViewById(R.id.jz_video);
+        mJzvdStd =  findViewById(R.id.jz_video);
         Intent intent = getIntent();
         if (intent != null) {
             String title = intent.getStringExtra("title");
@@ -106,28 +107,21 @@ public class PlaybackActivity extends FragmentActivity {
         } else if (keyCode == KeyEvent.KEYCODE_BUTTON_R2) {
             // mPlaybackFragment.fastForward();
         } else if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {//ok键
-            LogUtils.d("liuwei", "state --> " + mJzvdStd.state);
-            if (mJzvdStd.state == STATE_NORMAL || mJzvdStd.state == STATE_BUFFERING) {
+            if (mJzvdStd.state == STATE_NORMAL || mJzvdStd.state == STATE_AUTO_COMPLETE) {
                 mJzvdStd.startVideo();
-            } else if (mJzvdStd.state == STATE_PLAYING || mJzvdStd.state == STATE_FAST_FORWARDING) {
+            } else if (mJzvdStd.state == STATE_PREPARED || mJzvdStd.state == STATE_PLAYING) {
                 mJzvdStd.goOnPlayOnPause();
-            } else if (mJzvdStd.state == STATE_REWINDING) {
+            } else if (mJzvdStd.state == STATE_PAUSE) {
                 mJzvdStd.goOnPlayOnResume();
             }
         } else if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {//向左键
-            // mJzvdStd.
-
+            mJzvdStd.seekToTime(-SEEK_TIME);
         } else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {//向右键
-            LogUtils.d("liuwei", "state --> " + keyCode);
-            //mJzvdStd.goOnPlayOnPause();
-            mJzvdStd.seekToInAdvance = 20000;
+            mJzvdStd.seekToTime(SEEK_TIME);
+
         }
-//这里只有开始播放时才生效
-        // mJzvdStd.seekToInAdvance = 20000;
-
-//跳转制定位置播放
-
-
         return super.onKeyDown(keyCode, event);
     }
+
+
 }
