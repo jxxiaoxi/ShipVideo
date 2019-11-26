@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.SeekBar;
 
 import com.anding.shipvideo.R;
+import com.anding.videopalyer.JzvdStd;
 
-import cn.jzvd.JzvdStd;
 
 /**
  * 这里可以监听到视频播放的生命周期和播放状态
@@ -34,7 +34,7 @@ public class Player extends JzvdStd {
     public void onClick(View v) {
         super.onClick(v);
         int i = v.getId();
-        if (i == cn.jzvd.R.id.fullscreen) {
+        if (i == R.id.fullscreen) {
             Log.i(TAG, "onClick: fullscreen button");
         } else if (i == R.id.start) {
             Log.i(TAG, "onClick: start button");
@@ -45,7 +45,7 @@ public class Player extends JzvdStd {
     public boolean onTouch(View v, MotionEvent event) {
         super.onTouch(v, event);
         int id = v.getId();
-        if (id == cn.jzvd.R.id.surface_container) {
+        if (id == R.id.surface_container) {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_UP:
                     if (mChangePosition) {

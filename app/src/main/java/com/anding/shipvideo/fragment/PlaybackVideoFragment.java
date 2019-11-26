@@ -20,10 +20,6 @@ import android.support.v17.leanback.media.PlaybackTransportControlGlue;
 import android.view.View;
 
 import com.anding.shipvideo.R;
-import com.anding.shipvideo.player.Player;
-import com.bumptech.glide.Glide;
-
-import cn.jzvd.Jzvd;
 
 /**
  * Handles video playback with media controls.

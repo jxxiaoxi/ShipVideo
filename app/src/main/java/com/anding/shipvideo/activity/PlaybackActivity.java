@@ -26,15 +26,15 @@ import com.anding.shipvideo.R;
 import com.anding.shipvideo.fragment.PlaybackVideoFragment;
 import com.anding.shipvideo.player.Player;
 import com.anding.shipvideo.utils.LogUtils;
+import com.anding.videopalyer.Jzvd;
 import com.bumptech.glide.Glide;
 
-import cn.jzvd.Jzvd;
 
 import static android.media.session.PlaybackState.STATE_BUFFERING;
 import static android.media.session.PlaybackState.STATE_FAST_FORWARDING;
 import static android.media.session.PlaybackState.STATE_PLAYING;
 import static android.media.session.PlaybackState.STATE_REWINDING;
-import static cn.jzvd.Jzvd.STATE_NORMAL;
+import static com.anding.videopalyer.Jzvd.STATE_NORMAL;
 
 /**
  * Loads {@link PlaybackVideoFragment}.

@@ -40,9 +40,10 @@ dependencies {
     implementation 'com.owen:tv-widget:1.0.1'
     implementation 'com.owen:tv-focusborder:1.1.2'
     implementation project(path: ':leanback')
+    implementation project(path: ':videopalyer')
     implementation "org.greenrobot:greendao:3.2.2"
     implementation 'com.squareup.okhttp3:okhttp:4.0.0'
     implementation 'com.alibaba:fastjson:1.2.49'
     implementation 'com.alibaba:fastjson:1.1.70.android'
-    implementation 'cn.jzvd:jiaozivideoplayer:7.0.5'
+//    implementation 'cn.jzvd:jiaozivideoplayer:7.0.5'
 }
