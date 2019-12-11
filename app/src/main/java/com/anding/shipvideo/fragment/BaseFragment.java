@@ -19,9 +19,11 @@ package com.anding.shipvideo.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +31,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.owen.focus.AbsFocusBorder;
 import com.owen.focus.FocusBorder;
 import com.owen.tvrecyclerview.widget.TvRecyclerView;
 
@@ -76,8 +79,41 @@ public abstract class BaseFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         if(getActivity() instanceof FocusBorderHelper) {
-            mFocusBorder = ((FocusBorderHelper)getActivity()).getFocusBorder();
+           // mFocusBorder = ((FocusBorderHelper)getActivity()).getFocusBorder();
+            mFocusBorder = initBorder();
         }
+    }
+
+    private FocusBorder initBorder(){
+        /** 颜色焦点框 */
+        FocusBorder mColorFocusBorder = new FocusBorder.Builder().asColor()
+                //阴影宽度(方法shadowWidth(18f)也可以设置阴影宽度)
+                .shadowWidth(TypedValue.COMPLEX_UNIT_DIP, 2f)
+                //阴影颜色
+                .shadowColor(Color.parseColor("#ffffff"))
+                //边框宽度(方法borderWidth(2f)也可以设置边框宽度)
+                .borderWidth(TypedValue.COMPLEX_UNIT_PX, 0.2f)
+                //边框颜色
+                .borderColor(Color.parseColor("#ffffff"))
+                //padding值
+                .padding(0f)
+                //动画时长
+                .animDuration(300)
+                //不要闪光动画
+                .noShimmer()
+                //闪光颜色
+                .shimmerColor(Color.parseColor("#66FFFFFF"))
+                //闪光动画时长
+                .shimmerDuration(1000)
+                //不要呼吸灯效果
+                .noBreathing()
+                //呼吸灯效果时长
+                .breathingDuration(3000)
+                //边框动画模式
+                .animMode(AbsFocusBorder.Mode.NOLL)
+                .build(this);
+
+        return  mColorFocusBorder;
     }
 
     @Override

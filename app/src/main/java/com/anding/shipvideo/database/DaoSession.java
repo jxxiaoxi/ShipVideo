@@ -8,9 +8,11 @@ import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.identityscope.IdentityScopeType;
 import org.greenrobot.greendao.internal.DaoConfig;
 
+import com.anding.shipvideo.data.CategorySub;
 import com.anding.shipvideo.data.Video;
 import com.anding.shipvideo.data.VideoReal;
 
+import com.anding.shipvideo.database.CategorySubDao;
 import com.anding.shipvideo.database.VideoDao;
 import com.anding.shipvideo.database.VideoRealDao;
 
@@ -23,9 +25,11 @@ import com.anding.shipvideo.database.VideoRealDao;
  */
 public class DaoSession extends AbstractDaoSession {
 
+    private final DaoConfig categorySubDaoConfig;
     private final DaoConfig videoDaoConfig;
     private final DaoConfig videoRealDaoConfig;
 
+    private final CategorySubDao categorySubDao;
     private final VideoDao videoDao;
     private final VideoRealDao videoRealDao;
 
@@ -33,22 +37,32 @@ public class DaoSession extends AbstractDaoSession {
             daoConfigMap) {
         super(db);
 
+        categorySubDaoConfig = daoConfigMap.get(CategorySubDao.class).clone();
+        categorySubDaoConfig.initIdentityScope(type);
+
         videoDaoConfig = daoConfigMap.get(VideoDao.class).clone();
         videoDaoConfig.initIdentityScope(type);
 
         videoRealDaoConfig = daoConfigMap.get(VideoRealDao.class).clone();
         videoRealDaoConfig.initIdentityScope(type);
 
+        categorySubDao = new CategorySubDao(categorySubDaoConfig, this);
         videoDao = new VideoDao(videoDaoConfig, this);
         videoRealDao = new VideoRealDao(videoRealDaoConfig, this);
 
+        registerDao(CategorySub.class, categorySubDao);
         registerDao(Video.class, videoDao);
         registerDao(VideoReal.class, videoRealDao);
     }
     
     public void clear() {
+        categorySubDaoConfig.clearIdentityScope();
         videoDaoConfig.clearIdentityScope();
         videoRealDaoConfig.clearIdentityScope();
+    }
+
+    public CategorySubDao getCategorySubDao() {
+        return categorySubDao;
     }
 
     public VideoDao getVideoDao() {

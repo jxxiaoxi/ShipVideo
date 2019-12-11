@@ -55,7 +55,7 @@ public class PlaybackActivity extends FragmentActivity {
 //        }
         mJzvdStd =  findViewById(R.id.jz_video);
         Intent intent = getIntent();
-        if (intent != null) {
+        if (intent == null) {
             String title = intent.getStringExtra("title");
             String uri = intent.getStringExtra("uri");
             String pic = intent.getStringExtra("pic");
@@ -64,9 +64,10 @@ public class PlaybackActivity extends FragmentActivity {
                     , title);
             Glide.with(this).load(pic).into(mJzvdStd.thumbImageView);
             mJzvdStd.startVideo();
-            //mJzvdStd.gotoScreenFullscreen();
+            //mJzvdStd.gotoScreenFullscreen();+
         } else {
-            mJzvdStd.setUp("http://jzvd.nathen.cn/c6e3dc12a1154626b3476d9bf3bd7266/6b56c5f0dc31428083757a45764763b0-5287d2089db37e62345123a1be272f8b.mp4"
+            mJzvdStd.setUp("\n" +
+                            "http://180.153.119.11/vhot2.qqvideo.tc.qq.com/AbhcsTY0HQmqakmg8DXC8OXiSLntF9vObyZCmauthmt8/uwMROfz2r5zAoaQXGdGnC2dfhzkrvqBxjTHFA2hC4m2Yr1g7/d3032vbxllc.mp4?vkey=86741CA0D63DBD2F3BE0F0EB4E51F5C79CBBA8199949247C3FE3B730922D463A7D0A498090C3A885770A123D9A1A0B056C65E80D648E0CDD1DA0B9FDEFD4A489B87998E26D11F37AC3F85374F83F19B0B14DDBF6CB65EEED28E0A96562F437516192AB1436DAD3C578B4762488F3B450"
                     , "饺子闭眼睛");
             Glide.with(this).load("http://jzvd-pic.nathen.cn/jzvd-pic/1bb2ebbe-140d-4e2e-abd2-9e7e564f71ac.png").into(mJzvdStd.thumbImageView);
         }

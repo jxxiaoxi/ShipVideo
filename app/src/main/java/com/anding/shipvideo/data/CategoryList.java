@@ -15,13 +15,13 @@
 package com.anding.shipvideo.data;
 
 
-import com.anding.shipvideo.data.Category;
+import com.anding.shipvideo.utils.Constants;
+import com.anding.shipvideo.utils.DatabaseUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public final class CategoryList {
-    private static ArrayList<Category> list;
     private static long count = 0;    //电影种类
     public static final String HEADER_CATEGORYS[] = {
             "行业",
@@ -34,22 +34,8 @@ public final class CategoryList {
      * 行业视频类别
      * */
     public static List<Category> setupTradeCategorys() {
-        list = new ArrayList<>();
-        long id[] = {
-                1, 2, 3, 4
-        };
-        String name[] = {
-                "行业类视频",
-                "行业类视频",
-                "行业类视频",
-                "行业类视频",
-        };
-
-        String description[] = {
-                "按行业分类 ",
-                "按时间分类 ",
-                "按地区分类 ",
-                "按工种分类"};
+        ArrayList<Category> list = new ArrayList<>();
+        List<CategorySub> categorySubs = DatabaseUtils.getInstance().queryCategorySubs(Constants.CATEGORY_TRADE + "");
 
         String cardImageUrl[] = {
                 "http://commondatastorage.googleapis.com/android-tv/Sample%20videos/Zeitgeist/Zeitgeist%202010_%20Year%20in%20Review/card.jpg",
@@ -58,13 +44,16 @@ public final class CategoryList {
                 "http://commondatastorage.googleapis.com/android-tv/Sample%20videos/April%20Fool's%202013/Introducing%20Google%20Fiber%20to%20the%20Pole/card.jpg",
         };
 
-        for (int index = 0; index < name.length; ++index) {
-            list.add(
-                    buildCategoryInfo(id[index],
-                            name[index],
-                            description[index], cardImageUrl[index]));
+        if (categorySubs == null) {
+            return null;
         }
 
+        for (int index = 0; index < categorySubs.size(); ++index) {
+            list.add(
+                    buildCategoryInfo(Constants.CATEGORY_TRADE,
+                            "行业类视频",
+                            categorySubs.get(index).getLabel(), cardImageUrl[Constants.CATEGORY_TRADE]));
+        }
         return list;
     }
 
@@ -73,37 +62,23 @@ public final class CategoryList {
      * 安全视频类别
      * */
     public static List<Category> setupSecurityCategorys() {
-        list = new ArrayList<>();
-        long id[] = {
-                5, 6, 7, 8
-        };
-        String name[] = {
-                "安全类视频",
-                "安全类视频",
-                "安全类视频",
-                "安全类视频",
-        };
-
-        String description[] = {
-                "按行业分类 ",
-                "按时间分类 ",
-                "按地区分类 ",
-                "按工种分类"};
-
+        ArrayList<Category> list = new ArrayList<>();
+        List<CategorySub> categorySubs = DatabaseUtils.getInstance().queryCategorySubs(Constants.CATEGORY_TIME + "");
         String cardImageUrl[] = {
                 "http://commondatastorage.googleapis.com/android-tv/Sample%20videos/Zeitgeist/Zeitgeist%202010_%20Year%20in%20Review/card.jpg",
                 "http://commondatastorage.googleapis.com/android-tv/Sample%20videos/Demo%20Slam/Google%20Demo%20Slam_%2020ft%20Search/card.jpg",
                 "http://commondatastorage.googleapis.com/android-tv/Sample%20videos/April%20Fool's%202013/Introducing%20Gmail%20Blue/card.jpg",
                 "http://commondatastorage.googleapis.com/android-tv/Sample%20videos/April%20Fool's%202013/Introducing%20Google%20Fiber%20to%20the%20Pole/card.jpg",
         };
-
-        for (int index = 0; index < name.length; ++index) {
-            list.add(
-                    buildCategoryInfo(id[index],
-                            name[index],
-                            description[index], cardImageUrl[index]));
+        if (categorySubs == null) {
+            return null;
         }
-
+        for (int index = 0; index < categorySubs.size(); ++index) {
+            list.add(
+                    buildCategoryInfo(Constants.CATEGORY_TIME,
+                            "安全视频类",
+                            categorySubs.get(index).getLabel(), cardImageUrl[Constants.CATEGORY_TIME]));
+        }
         return list;
     }
 
@@ -111,22 +86,11 @@ public final class CategoryList {
      * 工种视频类别
      * */
     public static List<Category> setupRegionCategorys() {
-        list = new ArrayList<>();
-        long id[] = {
-                9, 10, 11, 12
-        };
-        String name[] = {
-                "工种类视频",
-                "工种类视频",
-                "工种类视频",
-                "工种类视频",
-        };
-
-        String description[] = {
-                "按行业分类 ",
-                "按时间分类 ",
-                "按地区分类 ",
-                "按工种分类"};
+        ArrayList<Category> list = new ArrayList<>();
+        List<CategorySub> categorySubs = DatabaseUtils.getInstance().queryCategorySubs(Constants.CATEGORY_REGION + "");
+        if (categorySubs == null) {
+            return null;
+        }
 
         String cardImageUrl[] = {
                 "http://commondatastorage.googleapis.com/android-tv/Sample%20videos/Zeitgeist/Zeitgeist%202010_%20Year%20in%20Review/card.jpg",
@@ -134,37 +98,24 @@ public final class CategoryList {
                 "http://commondatastorage.googleapis.com/android-tv/Sample%20videos/April%20Fool's%202013/Introducing%20Gmail%20Blue/card.jpg",
                 "http://commondatastorage.googleapis.com/android-tv/Sample%20videos/April%20Fool's%202013/Introducing%20Google%20Fiber%20to%20the%20Pole/card.jpg",
         };
-
-        for (int index = 0; index < name.length; ++index) {
+        for (int index = 0; index < categorySubs.size(); ++index) {
             list.add(
-                    buildCategoryInfo(id[index],
-                            name[index],
-                            description[index], cardImageUrl[index]));
+                    buildCategoryInfo(Constants.CATEGORY_REGION,
+                            "工种类视频",
+                            categorySubs.get(index).getLabel(), cardImageUrl[Constants.CATEGORY_REGION]));
         }
-
         return list;
     }
 
     /*
-     * 工种视频类别
+     * 综合视频类别
      * */
     public static List<Category> setupColligateCategorys() {
-        list = new ArrayList<>();
-        long id[] = {
-                13, 14, 15, 16
-        };
-        String name[] = {
-                "综合类视频",
-                "综合类视频",
-                "综合类视频",
-                "综合类视频",
-        };
-
-        String description[] = {
-                "按行业分类 ",
-                "按时间分类 ",
-                "按地区分类 ",
-                "按工种分类"};
+        ArrayList<Category> list = new ArrayList<>();
+        List<CategorySub> categorySubs = DatabaseUtils.getInstance().queryCategorySubs(Constants.CATEGORY_COLLIGATE + "");
+        if (categorySubs == null) {
+            return null;
+        }
 
         String cardImageUrl[] = {
                 "http://commondatastorage.googleapis.com/android-tv/Sample%20videos/Zeitgeist/Zeitgeist%202010_%20Year%20in%20Review/card.jpg",
@@ -173,11 +124,11 @@ public final class CategoryList {
                 "http://commondatastorage.googleapis.com/android-tv/Sample%20videos/April%20Fool's%202013/Introducing%20Google%20Fiber%20to%20the%20Pole/card.jpg",
         };
 
-        for (int index = 0; index < name.length; ++index) {
+        for (int index = 0; index < categorySubs.size(); ++index) {
             list.add(
-                    buildCategoryInfo(id[index],
-                            name[index],
-                            description[index], cardImageUrl[index]));
+                    buildCategoryInfo(Constants.CATEGORY_COLLIGATE,
+                            "综合类视频",
+                            categorySubs.get(index).getLabel(), cardImageUrl[Constants.CATEGORY_COLLIGATE-1]));
         }
 
         return list;

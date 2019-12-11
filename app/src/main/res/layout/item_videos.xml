@@ -5,8 +5,7 @@
     android:layout_height="260dp"
     android:background="@color/item_default_color"
     android:clickable="true"
-    android:focusable="true"
-    app:rfl_radius="20dp">
+    android:focusable="true">
 <!--<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="130dp">-->

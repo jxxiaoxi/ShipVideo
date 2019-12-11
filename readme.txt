@@ -5,3 +5,5 @@ tvapp构建博客专题 https://www.jianshu.com/c/3f0ab61a1322
 使用Leanback写国内UI风格的TV应用 https://www.jianshu.com/p/b286e087b074
 
 官方参考文档 https://developer.android.google.cn/training/tv
+
+tv中的 TvRecyclerView 比较流行的两个 https://github.com/zhousuqiang/TvRecyclerView ， https://github.com/henryblue/TvRecyclerView

@@ -11,7 +11,6 @@ import com.anding.shipvideo.adapter.VideosAdapter;
 import com.anding.shipvideo.data.Video;
 import com.anding.shipvideo.manager.VideosManager;
 import com.anding.shipvideo.utils.DisplayAdaptive;
-import com.anding.shipvideo.utils.LogUtils;
 import com.owen.adapter.CommonRecyclerViewAdapter;
 import com.owen.tvrecyclerview.widget.SimpleOnItemListener;
 import com.owen.tvrecyclerview.widget.TvRecyclerView;
@@ -51,7 +50,7 @@ public class VideosFragment extends BaseFragment {
         //mAdapter.setDatas(VideosManager.getInstance().queryVideosByCategory(0));
         videos =  VideosManager.getInstance().queryAll();
         if(videos != null) {
-            LogUtils.d("liuwei", "video size ---> " + videos.size());
+            //LogUtils.d("liuwei", "video size ---> " + videos.size());
             mAdapter.setDatas(videos);
             mRecyclerView.setAdapter(mAdapter);
         }
@@ -64,7 +63,7 @@ public class VideosFragment extends BaseFragment {
 
             @Override
             public void onItemSelected(TvRecyclerView parent, View itemView, int position) {
-                float radius = DisplayAdaptive.getInstance().toLocalPx(10);
+                float radius = DisplayAdaptive.getInstance().toLocalPx(0);
                 onMoveFocusBorder(itemView, 1.1f, radius);
             }
 

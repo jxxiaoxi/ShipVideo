@@ -8,9 +8,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.anding.shipvideo.R;
+import com.anding.shipvideo.data.CategorySub;
 import com.anding.shipvideo.data.Splash;
 import com.anding.shipvideo.data.Video;
 import com.anding.shipvideo.manager.VideosManager;
@@ -18,6 +20,7 @@ import com.anding.shipvideo.utils.Constants;
 import com.anding.shipvideo.utils.DatabaseUtils;
 import com.anding.shipvideo.utils.HttpUtils;
 import com.anding.shipvideo.utils.LogUtils;
+import com.anding.shipvideo.utils.NetWorkUtils;
 import com.anding.shipvideo.utils.SerializableUtils;
 import com.bumptech.glide.Glide;
 
@@ -67,6 +70,15 @@ public class SplashActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         initVideosFromRemote();
+        List<CategorySub> CategorySubs = DatabaseUtils.getInstance().queryAllCategorySub();
+        if (CategorySubs != null && CategorySubs.size() <= 0) {
+            initCategorySub(Constants.SERVER_HY_CATEGORY_URL);
+            initCategorySub(Constants.SERVER_AQ_CATEGORY_URL);
+            initCategorySub(Constants.SERVER_GZ_CATEGORY_URL);
+            initCategorySub(Constants.SERVER_ZH_CATEGORY_URL);
+        }else{
+            LogUtils.d(TAG,"CategorySubS NO changes");
+        }
         showAndDownSplash();
     }
 
@@ -102,7 +114,7 @@ public class SplashActivity extends BaseActivity {
     private void showSplash() {
         mSplash = getLocalSplash();
         if (mSplash != null && !TextUtils.isEmpty(mSplash.savePath)) {
-           LogUtils.d(TAG, "SplashActivity 获取本地序列化成功" + mSplash);
+            LogUtils.d(TAG, "SplashActivity 获取本地序列化成功" + mSplash);
             Glide.with(this).load(mSplash.savePath).dontAnimate().into(mSpBgImage);
             startClock();
         } else {
@@ -110,7 +122,12 @@ public class SplashActivity extends BaseActivity {
             mSpJumpBtn.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    gotoMainActivity();
+                    if (!NetWorkUtils.isNetworkAvailable()) {
+                        Toast.makeText(SplashActivity.this, "您的电视盒子没有联网，程序暂时没法使用，请先联网", Toast.LENGTH_LONG).show();
+                        finish();
+                    } else {
+                        gotoMainActivity();
+                    }
                 }
             }, 4000);
         }
@@ -179,7 +196,7 @@ public class SplashActivity extends BaseActivity {
                 // 2 解析JSON数据
                 String videosStr = response.body().string();
                 LogUtils.d(TAG, "initVideosFromRemote success==> " + videosStr);
-                 List<Video> videos = JSON.parseArray(videosStr, Video.class);
+                List<Video> videos = JSON.parseArray(videosStr, Video.class);
                 VideosManager.getInstance().deleteAllVideos();
 //                ArrayList<Video> videos = new ArrayList<>();
 //                for (int j = 0; j < videos.size(); j++) {
@@ -200,6 +217,33 @@ public class SplashActivity extends BaseActivity {
 
     }
 
+    private void initCategorySub(String url) {
+        HttpUtils.getInstance().getDataAsyn(url, new HttpUtils.NetWorkCallBack() {
+            @Override
+            public void success(Call call, Response response) throws IOException {
+                if (response == null) {
+                    LogUtils.d(TAG, "initHYCategorySub response is null ");
+                    return;
+                }
+                // 2 解析JSON数据
+                String categorySubsStr = response.body().string();
+                LogUtils.d(TAG, "initHYCategorySub success==> " + categorySubsStr);
+                List<CategorySub> categorySubs = JSON.parseArray(categorySubsStr, CategorySub.class);
+                DatabaseUtils.getInstance().deleteAllCategorySubs();
+                DatabaseUtils.getInstance().insertCategorySubs(categorySubs);
+                for (int i = 0; i < categorySubs.size(); i++) {
+                    LogUtils.d(TAG, "name ==> " + categorySubs.get(i).getLabel());
+                    //DatabaseUtils.getInstance().insertVideo(categorySubs.get(i));
+                }
+            }
+
+            @Override
+            public void failed(Call call, IOException e) {
+                LogUtils.d(TAG, "initVideosFromRemote failed " + e.toString());
+            }
+        });
+
+    }
 
 
     private void showNeedNetWorkDialog() {

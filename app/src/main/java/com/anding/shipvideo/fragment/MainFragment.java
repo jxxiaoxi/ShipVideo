@@ -119,45 +119,56 @@ public class MainFragment extends BrowseFragment {
         List<Category> tradeList = CategoryList.setupTradeCategorys();
 
         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(cardPresenter);
-        for (int j = 0; j < NUM_COLS; j++) {
+        if(tradeList == null){
+            return;
+        }
+        for (int j = 0; j < tradeList.size(); j++) {
             listRowAdapter.add(tradeList.get(j));
         }
-        HeaderItem header = new HeaderItem(Constants.CATEGORY_TRADE, CategoryList.HEADER_CATEGORYS[Constants.CATEGORY_TRADE]);
+        HeaderItem header = new HeaderItem(Constants.CATEGORY_TRADE, CategoryList.HEADER_CATEGORYS[Constants.CATEGORY_TRADE-1]);
         rowsAdapter.add(new ListRow(header, listRowAdapter));
         setAdapter(rowsAdapter);
     }
 
     private void initSecurityCategoryRows(ArrayObjectAdapter rowsAdapter, CardPresenter cardPresenter) {
-        List<Category> tradeList = CategoryList.setupSecurityCategorys();
+        List<Category> securityList = CategoryList.setupSecurityCategorys();
 
         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(cardPresenter);
-        for (int j = 0; j < NUM_COLS; j++) {
-            listRowAdapter.add(tradeList.get(j));
+        if(securityList == null){
+            return;
         }
-        HeaderItem header = new HeaderItem(Constants.CATEGORY_TIME, CategoryList.HEADER_CATEGORYS[Constants.CATEGORY_TIME]);
+        for (int j = 0; j < securityList.size(); j++) {
+            listRowAdapter.add(securityList.get(j));
+        }
+        HeaderItem header = new HeaderItem(Constants.CATEGORY_TIME, CategoryList.HEADER_CATEGORYS[Constants.CATEGORY_TIME-1]);
         rowsAdapter.add(new ListRow(header, listRowAdapter));
         setAdapter(rowsAdapter);
     }
 
     private void initRegionCategoryRows(ArrayObjectAdapter rowsAdapter, CardPresenter cardPresenter) {
-        List<Category> tradeList = CategoryList.setupRegionCategorys();
-
+        List<Category> regionList = CategoryList.setupRegionCategorys();
         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(cardPresenter);
-        for (int j = 0; j < NUM_COLS; j++) {
-            listRowAdapter.add(tradeList.get(j));
+        if(regionList == null){
+            return;
         }
-        HeaderItem header = new HeaderItem(Constants.CATEGORY_REGION, CategoryList.HEADER_CATEGORYS[Constants.CATEGORY_REGION]);
+        for (int j = 0; j < regionList.size(); j++) {
+            listRowAdapter.add(regionList.get(j));
+        }
+        HeaderItem header = new HeaderItem(Constants.CATEGORY_REGION, CategoryList.HEADER_CATEGORYS[Constants.CATEGORY_REGION-1]);
         rowsAdapter.add(new ListRow(header, listRowAdapter));
         setAdapter(rowsAdapter);
     }
 
     private void initColligateCategoryRows(ArrayObjectAdapter rowsAdapter, CardPresenter cardPresenter) {
-        List<Category> tradeList = CategoryList.setupColligateCategorys();
+        List<Category> colligateList = CategoryList.setupColligateCategorys();
         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(cardPresenter);
-        for (int j = 0; j < NUM_COLS; j++) {
-            listRowAdapter.add(tradeList.get(j));
+        if(colligateList == null){
+            return;
         }
-        HeaderItem header = new HeaderItem(Constants.CATEGORY_COLLIGATE, CategoryList.HEADER_CATEGORYS[Constants.CATEGORY_COLLIGATE]);
+        for (int j = 0; j < colligateList.size(); j++) {
+            listRowAdapter.add(colligateList.get(j));
+        }
+        HeaderItem header = new HeaderItem(listRowAdapter.size(), CategoryList.HEADER_CATEGORYS[Constants.CATEGORY_COLLIGATE-1]);
         rowsAdapter.add(new ListRow(header, listRowAdapter));
         setAdapter(rowsAdapter);
     }

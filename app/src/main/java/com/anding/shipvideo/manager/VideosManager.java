@@ -26,7 +26,7 @@ public class VideosManager {
      * 获取所有的视频
      * */
     public List<Video> queryAll() {
-        List<Video> videos = DatabaseUtils.getInstance().queryAll();
+        List<Video> videos = DatabaseUtils.getInstance().queryAllVideos();
         return videos;
     }
 
@@ -50,7 +50,7 @@ public class VideosManager {
      * 批量插入视频到数据库
      * */
     public void insertVideos(List<Video> videos) {
-        DatabaseUtils.getInstance().insertVideos(videos);
+        //DatabaseUtils.getInstance().insertVideos(videos);
     }
 
     /*
