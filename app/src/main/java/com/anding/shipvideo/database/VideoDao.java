@@ -27,6 +27,7 @@ public class VideoDao extends AbstractDao<Video, Void> {
         public final static Property Vid = new Property(0, String.class, "vid", false, "VID");
         public final static Property Vname = new Property(1, String.class, "vname", false, "VNAME");
         public final static Property Vpic = new Property(2, String.class, "vpic", false, "VPIC");
+        public final static Property Vcate = new Property(3, String.class, "vcate", false, "VCATE");
     }
 
 
@@ -44,7 +45,8 @@ public class VideoDao extends AbstractDao<Video, Void> {
         db.execSQL("CREATE TABLE " + constraint + "\"VIDEO\" (" + //
                 "\"VID\" TEXT," + // 0: vid
                 "\"VNAME\" TEXT," + // 1: vname
-                "\"VPIC\" TEXT);"); // 2: vpic
+                "\"VPIC\" TEXT," + // 2: vpic
+                "\"VCATE\" TEXT);"); // 3: vcate
     }
 
     /** Drops the underlying database table. */
@@ -71,6 +73,11 @@ public class VideoDao extends AbstractDao<Video, Void> {
         if (vpic != null) {
             stmt.bindString(3, vpic);
         }
+ 
+        String vcate = entity.getVcate();
+        if (vcate != null) {
+            stmt.bindString(4, vcate);
+        }
     }
 
     @Override
@@ -91,6 +98,11 @@ public class VideoDao extends AbstractDao<Video, Void> {
         if (vpic != null) {
             stmt.bindString(3, vpic);
         }
+ 
+        String vcate = entity.getVcate();
+        if (vcate != null) {
+            stmt.bindString(4, vcate);
+        }
     }
 
     @Override
@@ -103,7 +115,8 @@ public class VideoDao extends AbstractDao<Video, Void> {
         Video entity = new Video( //
             cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // vid
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // vname
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2) // vpic
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // vpic
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3) // vcate
         );
         return entity;
     }
@@ -113,6 +126,7 @@ public class VideoDao extends AbstractDao<Video, Void> {
         entity.setVid(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
         entity.setVname(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setVpic(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setVcate(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
      }
     
     @Override

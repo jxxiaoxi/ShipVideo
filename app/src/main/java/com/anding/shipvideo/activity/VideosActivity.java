@@ -1,5 +1,6 @@
 package com.anding.shipvideo.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.TypedValue;
@@ -14,11 +15,12 @@ public class VideosActivity extends FragmentActivity implements BaseFragment.Foc
     protected FocusBorder mFocusBorder;
 
     VideosFragment mFragment;
+    Intent mIntent;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_videos);
-
+        mIntent = getIntent();
         // 移动框
         if(null == mFocusBorder) {
             mFocusBorder = new FocusBorder.Builder()
@@ -39,5 +41,9 @@ public class VideosActivity extends FragmentActivity implements BaseFragment.Foc
     @Override
     public FocusBorder getFocusBorder() {
         return mFocusBorder;
+    }
+
+    public Intent getCategoryDetails(){
+        return mIntent;
     }
 }

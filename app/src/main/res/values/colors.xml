@@ -1,4 +1,7 @@
 <resources>
+
+
+    <color name="app_background_color"> #B5C6CE</color>
     <color name="background_gradient_start">#000000</color>
     <color name="background_gradient_end">#DDDDDD</color>
     <color name="fastlane_background">#0096a6</color>

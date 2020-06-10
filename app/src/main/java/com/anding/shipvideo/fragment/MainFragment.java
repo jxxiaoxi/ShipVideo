@@ -15,7 +15,6 @@
 package com.anding.shipvideo.fragment;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,10 +22,7 @@ import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anding.shipvideo.activity.SearchActivity;
@@ -96,7 +92,7 @@ public class MainFragment extends BrowseFragment {
     public void onDestroy() {
         super.onDestroy();
         if (null != mBackgroundTimer) {
-            Log.d(TAG, "onDestroy: " + mBackgroundTimer.toString());
+            LogUtils.d(TAG, "onDestroy: " + mBackgroundTimer.toString());
             mBackgroundTimer.cancel();
         }
     }
@@ -119,13 +115,13 @@ public class MainFragment extends BrowseFragment {
         List<Category> tradeList = CategoryList.setupTradeCategorys();
 
         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(cardPresenter);
-        if(tradeList == null){
+        if (tradeList == null) {
             return;
         }
         for (int j = 0; j < tradeList.size(); j++) {
             listRowAdapter.add(tradeList.get(j));
         }
-        HeaderItem header = new HeaderItem(Constants.CATEGORY_TRADE, CategoryList.HEADER_CATEGORYS[Constants.CATEGORY_TRADE-1]);
+        HeaderItem header = new HeaderItem(Constants.CATEGORY_TRADE, CategoryList.HEADER_CATEGORYS[Constants.CATEGORY_TRADE - 1]);
         rowsAdapter.add(new ListRow(header, listRowAdapter));
         setAdapter(rowsAdapter);
     }
@@ -134,13 +130,13 @@ public class MainFragment extends BrowseFragment {
         List<Category> securityList = CategoryList.setupSecurityCategorys();
 
         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(cardPresenter);
-        if(securityList == null){
+        if (securityList == null) {
             return;
         }
         for (int j = 0; j < securityList.size(); j++) {
             listRowAdapter.add(securityList.get(j));
         }
-        HeaderItem header = new HeaderItem(Constants.CATEGORY_TIME, CategoryList.HEADER_CATEGORYS[Constants.CATEGORY_TIME-1]);
+        HeaderItem header = new HeaderItem(Constants.CATEGORY_TIME, CategoryList.HEADER_CATEGORYS[Constants.CATEGORY_TIME - 1]);
         rowsAdapter.add(new ListRow(header, listRowAdapter));
         setAdapter(rowsAdapter);
     }
@@ -148,13 +144,13 @@ public class MainFragment extends BrowseFragment {
     private void initRegionCategoryRows(ArrayObjectAdapter rowsAdapter, CardPresenter cardPresenter) {
         List<Category> regionList = CategoryList.setupRegionCategorys();
         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(cardPresenter);
-        if(regionList == null){
+        if (regionList == null) {
             return;
         }
         for (int j = 0; j < regionList.size(); j++) {
             listRowAdapter.add(regionList.get(j));
         }
-        HeaderItem header = new HeaderItem(Constants.CATEGORY_REGION, CategoryList.HEADER_CATEGORYS[Constants.CATEGORY_REGION-1]);
+        HeaderItem header = new HeaderItem(Constants.CATEGORY_REGION, CategoryList.HEADER_CATEGORYS[Constants.CATEGORY_REGION - 1]);
         rowsAdapter.add(new ListRow(header, listRowAdapter));
         setAdapter(rowsAdapter);
     }
@@ -162,13 +158,13 @@ public class MainFragment extends BrowseFragment {
     private void initColligateCategoryRows(ArrayObjectAdapter rowsAdapter, CardPresenter cardPresenter) {
         List<Category> colligateList = CategoryList.setupColligateCategorys();
         ArrayObjectAdapter listRowAdapter = new ArrayObjectAdapter(cardPresenter);
-        if(colligateList == null){
+        if (colligateList == null) {
             return;
         }
         for (int j = 0; j < colligateList.size(); j++) {
             listRowAdapter.add(colligateList.get(j));
         }
-        HeaderItem header = new HeaderItem(listRowAdapter.size(), CategoryList.HEADER_CATEGORYS[Constants.CATEGORY_COLLIGATE-1]);
+        HeaderItem header = new HeaderItem(listRowAdapter.size(), CategoryList.HEADER_CATEGORYS[Constants.CATEGORY_COLLIGATE - 1]);
         rowsAdapter.add(new ListRow(header, listRowAdapter));
         setAdapter(rowsAdapter);
     }
@@ -209,13 +205,14 @@ public class MainFragment extends BrowseFragment {
         @Override
         public void onItemClicked(Presenter.ViewHolder itemViewHolder, Object item,
                                   RowPresenter.ViewHolder rowViewHolder, Row row) {
-            Log.d(TAG, "onItemClicked ==> " + row.getId() + " -->" + row.getHeaderItem().getId() + " ---> " + row.getHeaderItem().getName());
+            LogUtils.d(TAG, "onItemClicked ==> " + row.getId() + " -->" + row.getHeaderItem().getId() + " ---> " + row.getHeaderItem().getName());
             if (item instanceof Category) {
-                Category Category = (Category) item;
-                Log.d(TAG, "Item: " + item.toString() + Category.getId());
-                Intent intent = new Intent(getActivity(), VideosActivity.class);
-                // intent.putExtra(DetailsActivity.Category, Category);
+                Category category = (Category) item;
 
+                LogUtils.d(TAG, "onItemClicked: " + category.toString());
+                Intent intent = new Intent(getActivity(), VideosActivity.class);
+                intent.putExtra(Constants.CATEGORY_VALUE, category.getValue());
+                intent.putExtra(Constants.CATEGORY_DESCRIPTION, category.getDescription());
                 getActivity().startActivity(intent);
             } else if (item instanceof String) {
                 if (((String) item).contains(getString(R.string.error_fragment))) {
@@ -235,7 +232,7 @@ public class MainFragment extends BrowseFragment {
                 Object item,
                 RowPresenter.ViewHolder rowViewHolder,
                 Row row) {
-            Log.d(TAG, "ItemViewSelectedListener" + row.getId() + "-->" + row.getHeaderItem().getName() + "  " + row.getHeaderItem().getId());
+            LogUtils.d(TAG, "ItemViewSelectedListener" + row.getId() + "-->" + row.getHeaderItem().getName() + "  " + row.getHeaderItem().getId());
             if (item instanceof Category) {
                 // mBackgroundUri = ((Category) item).getBackgroundImageUrl();
                 //  startBackgroundTimer();

@@ -3,15 +3,10 @@ package com.anding.shipvideo.utils;
 
 import com.anding.shipvideo.ShipvideoApplication;
 
-/**
- * Created by wangshijia on 2017/2/8 下午2:52.
- * Copyright (c) 2017. alpha, Inc. All rights reserved.
- */
-
 public class Constants {
 
-    //服务器地址
-    public static final String SERVER_URL = "http://132.232.111.161/gift/vlist?hy=0&aq=0&gz=0&zh=0";
+    //服务器地址，请求所有的视频
+    public static final String SERVER_URL = "http://132.232.111.161/gift/vlist?cate=0";
     //行业具体分类
     public static final String SERVER_HY_CATEGORY_URL = "http://132.232.111.161/gift/hy";
     //安全具体分类
@@ -20,6 +15,9 @@ public class Constants {
     public static final String SERVER_GZ_CATEGORY_URL = "http://132.232.111.161/gift/gz";
     //综合具体分类
     public static final String SERVER_ZH_CATEGORY_URL = "http://132.232.111.161/gift/zh";
+
+    //apk版本请求地址
+    public static final String SERVER_APK_URL = "https://alissl.ucdl.pp.uc.cn/fs08/2019/07/05/1/110_17e4089aa3a4b819b08069681a9de74b.apk";
 
     public static final String EXTRA_KEY_EXIT = "extra_key_exit";
 
@@ -34,5 +32,8 @@ public class Constants {
     public static final int CATEGORY_TIME = 2;
     public static final int CATEGORY_REGION = 3;
     public static final int CATEGORY_COLLIGATE = 4;
+
+    public static final String CATEGORY_VALUE = "category_value";
+    public static final String CATEGORY_DESCRIPTION = "category_description";
 
 }

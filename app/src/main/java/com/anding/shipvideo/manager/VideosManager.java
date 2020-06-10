@@ -30,6 +30,14 @@ public class VideosManager {
         return videos;
     }
 
+    /*
+     * 获取指定category的视频
+     * */
+    public List<Video> queryCategoryVideos(String value) {
+        List<Video> videos = DatabaseUtils.getInstance().queryCategoryVideos(value);
+        return videos;
+    }
+
 //    /*
 //     * 获取对应分类的视频
 //     * */

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -31,12 +30,15 @@ import java.util.List;
 import okhttp3.Call;
 import okhttp3.Response;
 
+
 public class SplashActivity extends BaseActivity {
     public static final String TAG = "SplashActivity";
 
     private Splash mSplash;
     ImageView mSpBgImage;
     Button mSpJumpBtn;
+
+
     //由于CountDownTimer有一定的延迟，所以这里设置3400
     private CountDownTimer countDownTimer = new CountDownTimer(3400, 1000) {
         @Override
@@ -70,17 +72,17 @@ public class SplashActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         initVideosFromRemote();
-        List<CategorySub> CategorySubs = DatabaseUtils.getInstance().queryAllCategorySub();
-        if (CategorySubs != null && CategorySubs.size() <= 0) {
-            initCategorySub(Constants.SERVER_HY_CATEGORY_URL);
-            initCategorySub(Constants.SERVER_AQ_CATEGORY_URL);
-            initCategorySub(Constants.SERVER_GZ_CATEGORY_URL);
-            initCategorySub(Constants.SERVER_ZH_CATEGORY_URL);
-        }else{
-            LogUtils.d(TAG,"CategorySubS NO changes");
+        List<CategorySub> categorySubs = DatabaseUtils.getInstance().queryAllCategorySub();
+        if (categorySubs != null && categorySubs.size() > 0) {
+            DatabaseUtils.getInstance().deleteAllCategorySubs();
         }
+        initCategorySub(Constants.SERVER_HY_CATEGORY_URL);
+        initCategorySub(Constants.SERVER_AQ_CATEGORY_URL);
+        initCategorySub(Constants.SERVER_GZ_CATEGORY_URL);
+        initCategorySub(Constants.SERVER_ZH_CATEGORY_URL);
         showAndDownSplash();
     }
+
 
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -89,7 +91,6 @@ public class SplashActivity extends BaseActivity {
                 break;
             case R.id.sp_jump_btn:
                 gotoMainActivity();
-
                 break;
         }
     }
@@ -140,13 +141,13 @@ public class SplashActivity extends BaseActivity {
     private Splash getLocalSplash() {
         Splash splash = null;
         try {
-            Log.d("存储路径", Constants.SPLASH_PATH);//修改为存储到内存卡中，不需要动态申请权限
+            LogUtils.d("存储路径", Constants.SPLASH_PATH);//修改为存储到内存卡中，不需要动态申请权限
             // /data/user/0/com.example.wsj.splashdemo/files/alpha/splash
             File serializableFile = SerializableUtils.getSerializableFile(Constants.SPLASH_PATH,
                     Constants.SPLASH_FILE_NAME);
             splash = (Splash) SerializableUtils.readObject(serializableFile);
         } catch (IOException e) {
-            Log.d("SplashDemo", "SplashActivity 获取本地序列化闪屏失败" + e.getMessage());
+            LogUtils.d("SplashDemo", "SplashActivity 获取本地序列化闪屏失败" + e.getMessage());
         }
         return splash;
     }
@@ -204,7 +205,7 @@ public class SplashActivity extends BaseActivity {
 //                }
 //                VideosManager.getInstance().insertVideos(videos);
                 for (int i = 0; i < videos.size(); i++) {
-                    LogUtils.d(TAG, "name ==> " + videos.get(i).getVname());
+                    LogUtils.d(TAG, "视频名字 ==> " + videos.get(i).getVname());
                     DatabaseUtils.getInstance().insertVideo(videos.get(i));
                 }
             }
@@ -212,6 +213,7 @@ public class SplashActivity extends BaseActivity {
             @Override
             public void failed(Call call, IOException e) {
                 LogUtils.d(TAG, "initVideosFromRemote failed " + e.toString());
+                Toast.makeText(SplashActivity.this, "视频获取失败", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -227,12 +229,12 @@ public class SplashActivity extends BaseActivity {
                 }
                 // 2 解析JSON数据
                 String categorySubsStr = response.body().string();
-                LogUtils.d(TAG, "initHYCategorySub success==> " + categorySubsStr);
+                LogUtils.d(TAG, "initHYCategorySub success==----------> " + categorySubsStr);
                 List<CategorySub> categorySubs = JSON.parseArray(categorySubsStr, CategorySub.class);
-                DatabaseUtils.getInstance().deleteAllCategorySubs();
+                //DatabaseUtils.getInstance().deleteAllCategorySubs();
                 DatabaseUtils.getInstance().insertCategorySubs(categorySubs);
                 for (int i = 0; i < categorySubs.size(); i++) {
-                    LogUtils.d(TAG, "name ==> " + categorySubs.get(i).getLabel());
+                    LogUtils.d(TAG, "二级分类 ==> " + categorySubs.get(i).getLabel());
                     //DatabaseUtils.getInstance().insertVideo(categorySubs.get(i));
                 }
             }

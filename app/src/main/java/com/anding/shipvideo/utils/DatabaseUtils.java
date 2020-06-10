@@ -46,6 +46,32 @@ public class DatabaseUtils {
     }
 
     /*
+     * 获取指定category的视频
+     * */
+    public List<Video> queryCategoryVideos(String value) {
+        List<Video> categoryVideos = new ArrayList<>();
+        List<Video> videos = queryAllVideos();
+        if (videos == null) {
+            LogUtils.d("DatabaseUtils ", "queryCategoryVideos null");
+            return null;
+        } else {
+            LogUtils.d("DatabaseUtils ", "queryCategoryVideos size : " + videos.size());
+        }
+        for (int i = 0; i < videos.size(); i++) {
+            Video video = videos.get(i);
+            String vcate = video.getVcate();
+            LogUtils.d("DatabaseUtils ", "vcate : "+ vcate + "   ; contains  : "+ vcate.contains(value));
+
+            if(vcate.contains(value)) {
+                categoryVideos.add(video);
+            }
+
+        }
+
+        return categoryVideos;
+    }
+
+    /*
      * 获取对应所有的二级分类
      * */
     public List<CategorySub> queryCategorySubs(String category) {

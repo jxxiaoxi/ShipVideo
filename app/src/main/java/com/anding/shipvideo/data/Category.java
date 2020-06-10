@@ -24,8 +24,17 @@ public class Category implements Serializable {
     private String name;//视频类别名称
     private String description;//视频类别描述
     private String cardImageUrl;//类别图
+    private String value;//二级分类值
 
     public Category() {
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public long getId() {
@@ -69,9 +78,12 @@ public class Category implements Serializable {
 
     @Override
     public String toString() {
-        return "Movie{" +
+        return "Category{" +
                 "id=" + id +
-                ", title='" + name + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", cardImageUrl='" + cardImageUrl + '\'' +
+                ", value='" + value + '\'' +
                 '}';
     }
 }

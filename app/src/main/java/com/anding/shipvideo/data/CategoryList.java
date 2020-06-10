@@ -52,7 +52,7 @@ public final class CategoryList {
             list.add(
                     buildCategoryInfo(Constants.CATEGORY_TRADE,
                             "行业类视频",
-                            categorySubs.get(index).getLabel(), cardImageUrl[Constants.CATEGORY_TRADE]));
+                            categorySubs.get(index).getLabel(), cardImageUrl[Constants.CATEGORY_COLLIGATE-1],categorySubs.get(index).getValue()));
         }
         return list;
     }
@@ -77,13 +77,13 @@ public final class CategoryList {
             list.add(
                     buildCategoryInfo(Constants.CATEGORY_TIME,
                             "安全视频类",
-                            categorySubs.get(index).getLabel(), cardImageUrl[Constants.CATEGORY_TIME]));
+                            categorySubs.get(index).getLabel(), cardImageUrl[Constants.CATEGORY_COLLIGATE-1],categorySubs.get(index).getValue()));
         }
         return list;
     }
 
     /*
-     * 工种视频类别
+     * 工种视频类别VideoReal
      * */
     public static List<Category> setupRegionCategorys() {
         ArrayList<Category> list = new ArrayList<>();
@@ -102,7 +102,7 @@ public final class CategoryList {
             list.add(
                     buildCategoryInfo(Constants.CATEGORY_REGION,
                             "工种类视频",
-                            categorySubs.get(index).getLabel(), cardImageUrl[Constants.CATEGORY_REGION]));
+                            categorySubs.get(index).getLabel(), cardImageUrl[Constants.CATEGORY_COLLIGATE-1],categorySubs.get(index).getValue()));
         }
         return list;
     }
@@ -128,7 +128,7 @@ public final class CategoryList {
             list.add(
                     buildCategoryInfo(Constants.CATEGORY_COLLIGATE,
                             "综合类视频",
-                            categorySubs.get(index).getLabel(), cardImageUrl[Constants.CATEGORY_COLLIGATE-1]));
+                            categorySubs.get(index).getLabel(), cardImageUrl[Constants.CATEGORY_COLLIGATE-1],categorySubs.get(index).getValue()));
         }
 
         return list;
@@ -138,12 +138,14 @@ public final class CategoryList {
             long id,
             String title,
             String description,
-            String cardImageUrl) {
+            String cardImageUrl,
+            String value) {
         Category category = new Category();
         category.setId(id);
         category.setName(title);
         category.setDescription(description);
         category.setCardImageUrl(cardImageUrl);
+        category.setValue(value);
         return category;
     }
 }

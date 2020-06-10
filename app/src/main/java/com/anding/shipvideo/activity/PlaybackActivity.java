@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Toast;
@@ -68,6 +69,7 @@ public class PlaybackActivity extends FragmentActivity {
     String URIKEY = "http://vv.video.qq.com/getkey?format=2&otype=json&vt=150&vid=d3032vbxllc&ran=0\\%2E9477521511726081\\\\&charge=0&filename=d3032vbxllc.mp4&platform=11";
 
     public String mPicUrl = null;
+    public String  mUrl= null;
     public String mTitle = null;
     //创建一个Handler
     private Handler handler = new Handler() {
@@ -84,7 +86,7 @@ public class PlaybackActivity extends FragmentActivity {
                     String realUri = (String) msg.obj;
                     if (realUri != null && mPicUrl != null && mTitle != null) {
                         mJzvdStd.setUp(realUri
-                                , "不用钱的视频");
+                                , mTitle);
                         Glide.with(PlaybackActivity.this).load(mPicUrl).into(mJzvdStd.thumbImageView);
                         mJzvdStd.startVideo();
                     }
@@ -158,26 +160,39 @@ public class PlaybackActivity extends FragmentActivity {
         mJzvdStd = findViewById(R.id.jz_video);
         Intent intent = getIntent();
         if (intent == null) {
-            LogUtils.d(TAG,"--------------play type 1-------------");
-            String title = intent.getStringExtra("title");
-            String uri = intent.getStringExtra("uri");
-            String pic = intent.getStringExtra("pic");
-            mJzvdStd.setUp(uri
-                    , title);
-            Glide.with(this).load(pic).into(mJzvdStd.thumbImageView);
-            mJzvdStd.startVideo();
-            //mJzvdStd.gotoScreenFullscreen();+
-        } else if (isChangeUrl) {
+            LogUtils.d(TAG,"--------------play type 1----------intent is null ---");
+            return;
+//            String title = intent.getStringExtra("title");
+//            String uri = intent.getStringExtra("uri");
+//            String pic = intent.getStringExtra("pic");
+//            mJzvdStd.setUp(uri, title);
+//            Glide.with(this).load(pic).into(mJzvdStd.thumbImageView);
+//            mJzvdStd.startVideo();
+//            mJzvdStd.gotoScreenFullscreen();
+        }
+
+        mTitle = intent.getStringExtra("title");
+        mUrl = intent.getStringExtra("uri");
+        mPicUrl = intent.getStringExtra("pic");
+
+        if(!TextUtils.isEmpty(mUrl)&& mUrl.startsWith("http:")){
+            isChangeUrl = false;
+        }else{
+            isChangeUrl = true;
+        }
+         if (isChangeUrl) {
             LogUtils.d(TAG,"--------------play type 2-------------");
-            mTitle = intent.getStringExtra("title");
-            mPicUrl = intent.getStringExtra("uri");
             changeUrl();
         } else {
             LogUtils.d(TAG,"--------------play type 3-------------");
-            mJzvdStd.setUp("\n" +
-                            "http://180.153.119.11/vhot2.qqvideo.tc.qq.com/AbhcsTY0HQmqakmg8DXC8OXiSLntF9vObyZCmauthmt8/uwMROfz2r5zAoaQXGdGnC2dfhzkrvqBxjTHFA2hC4m2Yr1g7/d3032vbxllc.mp4?vkey=86741CA0D63DBD2F3BE0F0EB4E51F5C79CBBA8199949247C3FE3B730922D463A7D0A498090C3A885770A123D9A1A0B056C65E80D648E0CDD1DA0B9FDEFD4A489B87998E26D11F37AC3F85374F83F19B0B14DDBF6CB65EEED28E0A96562F437516192AB1436DAD3C578B4762488F3B450"
-                    , "饺子闭眼睛");
-            Glide.with(this).load("http://jzvd-pic.nathen.cn/jzvd-pic/1bb2ebbe-140d-4e2e-abd2-9e7e564f71ac.png").into(mJzvdStd.thumbImageView);
+//            mJzvdStd.setUp("\n" +
+//
+//                    , "饺子闭眼睛");
+//            Glide.with(this).load(mPicUrl).into(mJzvdStd.thumbImageView);
+             mJzvdStd.setUp(mUrl
+                     , mTitle);
+             Glide.with(PlaybackActivity.this).load(mPicUrl).into(mJzvdStd.thumbImageView);
+             mJzvdStd.startVideo();
         }
         // jzvdStd.thumbImageView.setImage("http://p.qpic.cn/videoyun/0/2449_43b6f696980311e59ed467f22794e792_1/640");
     }

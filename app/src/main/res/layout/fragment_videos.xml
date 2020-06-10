@@ -1,24 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent">
-<TextView
-    android:layout_width="match_parent"
-    android:layout_marginTop="20dp"
-    android:layout_marginLeft="40dp"
-    android:text="所有船舶安全视频"
-    android:textSize="35dp"
-    android:layout_height="wrap_content" />
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <com.owen.tvrecyclerview.widget.TvRecyclerView xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/list_11"
-        style="@style/TwoWayView"
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:tv_layoutManager="GridLayoutManager"
-        app:tv_numColumns="4"
-        app:tv_numRows="4" />
+        android:id="@+id/tv_title"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:text="所有船舶安全视频"
+        android:textSize="35dp" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:textStyle="bold"
+            android:textSize="35dp"
+            android:gravity="center"
+            android:textColor="@color/red"
+            android:id="@+id/tv_content"
+            android:layout_height="match_parent"
+            android:text="@string/no_video" />
+
+        <com.owen.tvrecyclerview.widget.TvRecyclerView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/list_11"
+            style="@style/TwoWayView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:tv_layoutManager="GridLayoutManager"
+            app:tv_numColumns="4"
+            app:tv_numRows="4" />
+    </RelativeLayout>
 </LinearLayout>

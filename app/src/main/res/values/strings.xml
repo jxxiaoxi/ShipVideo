@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ExtraTranslation">
     <string name="app_name">安鼎课堂</string>
     <string name="browse_title"><![CDATA[欢迎进入安鼎课堂!!!]]></string>
     <string name="related_movies">Related Videos</string>
@@ -21,4 +21,8 @@
     <string name="no_network_content">���粻���ã����ȿ����������ʹ��</string>
     <string name="cancal">ȡ��</string>
     <string name="confirm">ȷ��</string>
+    <string name="no_video">没有相关视频，请等待更新...</string>
+    <string name="category_video">类视频</string>
+    <string name="dialog_title">温馨提示</string>
+    <string name="dialog_new_apk_download">发现新版本,为了能更好的使用本产品，现在正在为你下载安装中，请耐心等待</string>
 </resources>
