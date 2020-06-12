@@ -44,6 +44,7 @@ public class HttpUtils {
     private static final byte[] LOCKER = new byte[0];
     private static HttpUtils mInstance;
     private OkHttpClient mOkHttpClient;
+    public static final String TAG = "HttpUtils";
 
     private HttpUtils() {
         okhttp3.OkHttpClient.Builder ClientBuilder = new okhttp3.OkHttpClient.Builder();
@@ -258,12 +259,9 @@ public class HttpUtils {
     }
 
     public void downloadFile(String apkurl, DownloadListener downloadListener) {
-
-
         //url设置，okhttp设置
         final String url = apkurl;
         final long startTime = System.currentTimeMillis();
-        Log.i("DOWNLOAD", "startTime=" + startTime);
         OkHttpClient okHttpClient = new OkHttpClient();
 
         //CALL 请求
@@ -286,7 +284,9 @@ public class HttpUtils {
                 try {
                     is = response.body().byteStream();
                     long total = response.body().contentLength();
-                    File file = new File(savePath, url.substring(url.lastIndexOf("/") + 1));
+
+                    // LogUtils.d(TAG,"total : "+total + " ;response : "+response.body().string());
+                    File file = new File(savePath, url.substring(url.lastIndexOf("/") + 1)+".apk");
                     fos = new FileOutputStream(file);
                     long sum = 0;
                     while ((len = is.read(buf)) != -1) {
@@ -294,6 +294,7 @@ public class HttpUtils {
                         sum += len;
                         int progress = (int) (sum * 1.0f / total * 100);
                         // 下载中
+
                         downloadListener.loading(progress);
                     }
                     fos.flush();

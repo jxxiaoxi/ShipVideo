@@ -36,4 +36,8 @@ public class Constants {
     public static final String CATEGORY_VALUE = "category_value";
     public static final String CATEGORY_DESCRIPTION = "category_description";
 
+    public static final String U_APPKEY = "5ee09719978eea085d11ea89";//友盟appkey
+    public static final String U_CHANNEL = "anding";//友盟Channel
+
+    public static final String CHECK_VERSION = "http://132.232.111.161/gift/test?version";
 }

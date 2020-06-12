@@ -22,6 +22,7 @@ import com.anding.shipvideo.utils.LogUtils;
 import com.anding.shipvideo.utils.NetWorkUtils;
 import com.anding.shipvideo.utils.SerializableUtils;
 import com.bumptech.glide.Glide;
+import com.umeng.analytics.MobclickAgent;
 
 import java.io.File;
 import java.io.IOException;
@@ -67,10 +68,10 @@ public class SplashActivity extends BaseActivity {
         });
 
     }
-
     @Override
     protected void onResume() {
         super.onResume();
+        MobclickAgent.onResume(this);
         initVideosFromRemote();
         List<CategorySub> categorySubs = DatabaseUtils.getInstance().queryAllCategorySub();
         if (categorySubs != null && categorySubs.size() > 0) {
@@ -82,7 +83,11 @@ public class SplashActivity extends BaseActivity {
         initCategorySub(Constants.SERVER_ZH_CATEGORY_URL);
         showAndDownSplash();
     }
-
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
 
     public void onViewClicked(View view) {
         switch (view.getId()) {

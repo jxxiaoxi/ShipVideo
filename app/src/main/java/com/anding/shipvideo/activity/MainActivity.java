@@ -22,18 +22,31 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.content.FileProvider;
+import android.text.TextUtils;
+import android.util.Config;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.anding.shipvideo.BuildConfig;
 import com.anding.shipvideo.R;
 import com.anding.shipvideo.callback.DownloadListener;
 import com.anding.shipvideo.utils.Constants;
 import com.anding.shipvideo.utils.HttpUtils;
 import com.anding.shipvideo.utils.LogUtils;
+import com.umeng.analytics.MobclickAgent;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Response;
 
 /*
  * Main Activity class that loads {@link MainFragment}.
@@ -50,10 +63,59 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         checkApkVersion();
+       // installApk("/storage/emulated/0/downapp.apk");
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
+
+
     private void checkApkVersion() {
-        getVersionName();
+        String version = getVersionName();
+        HttpUtils.getInstance().getDataAsyn(Constants.CHECK_VERSION + "=" + "1.0.0.8", new HttpUtils.NetWorkCallBack() {
+            @Override
+            public void success(Call call, Response response) throws IOException {
+                String strResponse = null;
+                strResponse = response.body().string();
+                if (strResponse == null) {
+                    return;
+                }
+                LogUtils.d(TAG, "start success==> " + strResponse);
+
+                try {
+                    JSONObject jsonObject = new JSONObject(strResponse);
+                    String result = jsonObject.optString("result");
+                    String url = null;
+                    LogUtils.d(TAG, "result==> " + result);
+                    if("yes".equals(result)){
+                        url =  jsonObject.optString("url");
+                        //url =  "https://alissl.ucdl.pp.uc.cn/fs08/2019/07/05/1/110_17e4089aa3a4b819b08069681a9de74b.apk";
+                    }
+
+                    if(!TextUtils.isEmpty(url)){
+                        downlodApkVersion(url);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void failed(Call call, IOException e) {
+                LogUtils.d(TAG, "initVideosFromRemote failed " + e.toString());
+            }
+        });
+
+
     }
 
     /**
@@ -62,7 +124,6 @@ public class MainActivity extends BaseActivity {
     public  String getVersionName(){
         // 获取packagemanager的实例
         PackageManager packageManager = this.getPackageManager();
-        // getPackageName()是你当前类的包名
         PackageInfo packInfo = null;
         String version = null;
         try {
@@ -76,8 +137,9 @@ public class MainActivity extends BaseActivity {
         return version;
     }
 
-    private void downlodApkVersion() {
-        HttpUtils.getInstance().downloadFile(Constants.SERVER_APK_URL, new DownloadListener() {
+    private void downlodApkVersion(String url) {
+        LogUtils.d(TAG,"url :  "+url);
+        HttpUtils.getInstance().downloadFile(url, new DownloadListener() {
             @Override
             public void start(long max) {
 
@@ -88,7 +150,7 @@ public class MainActivity extends BaseActivity {
                 LogUtils.d(TAG, "loading :  " + progress);
                 Message msg = new Message();
                 msg.what = UPDATE_PRO;
-                msg.arg1 = progress;
+                msg.arg1 =  (new Double(progress)).intValue();;
                 mHandler.sendMessage(msg);
             }
 
@@ -123,7 +185,7 @@ public class MainActivity extends BaseActivity {
                     updatePro(msg.arg1);
                     break;
                 case UPDATE_COMPLETE:
-                    //installApk((String) msg.obj);
+                    installApk((String) msg.obj);
                     mProgressDialog.cancel();
                     mProgressDialog = null;
                     break;
@@ -132,17 +194,23 @@ public class MainActivity extends BaseActivity {
     };
 
     public void installApk(String url) {
+        LogUtils.d(TAG,"installApk url :  "+url);
+        File apkfile = new File(url);
+        if (!apkfile.exists()) return;
+        // 通过Intent安装APK文件
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        File file = new File(url);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Uri apkUri = null;
+        //判断版本是否是 7.0 及 7.0 以上
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            apkUri = FileProvider.getUriForFile(this, "com.anding.shipvideo.provider", apkfile);
+            //添加这一句表示对目标应用临时授权该Uri所代表的文件
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         } else {
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            Uri uri = Uri.fromFile(file);
-            intent.setDataAndType(uri, "application/vnd.android.package-archive");
+            apkUri = Uri.fromFile(apkfile);
         }
+        intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
         this.startActivity(intent);
-
     }
 
     public void updatePro(int progress) {

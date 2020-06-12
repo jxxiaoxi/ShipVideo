@@ -38,6 +38,7 @@ import com.anding.shipvideo.utils.HttpUtils;
 import com.anding.shipvideo.utils.LogUtils;
 import com.anding.videopalyer.Jzvd;
 import com.bumptech.glide.Glide;
+import com.umeng.analytics.MobclickAgent;
 
 
 import org.json.JSONArray;
@@ -251,7 +252,7 @@ public class PlaybackActivity extends FragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
+        MobclickAgent.onResume(this);
     }
 
     @Override
@@ -265,6 +266,7 @@ public class PlaybackActivity extends FragmentActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        MobclickAgent.onPause(this);
         Jzvd.releaseAllVideos();
     }
 
@@ -297,6 +299,5 @@ public class PlaybackActivity extends FragmentActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
-
 
 }

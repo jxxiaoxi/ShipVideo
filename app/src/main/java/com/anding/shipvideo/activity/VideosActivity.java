@@ -10,6 +10,7 @@ import com.anding.shipvideo.fragment.VideosFragment;
 import com.anding.shipvideo.fragment.BaseFragment;
 import com.owen.tvrecyclerview.widget.TvRecyclerView;
 import com.owen.focus.FocusBorder;
+import com.umeng.analytics.MobclickAgent;
 
 public class VideosActivity extends FragmentActivity implements BaseFragment.FocusBorderHelper{
     protected FocusBorder mFocusBorder;
@@ -45,5 +46,16 @@ public class VideosActivity extends FragmentActivity implements BaseFragment.Foc
 
     public Intent getCategoryDetails(){
         return mIntent;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }
